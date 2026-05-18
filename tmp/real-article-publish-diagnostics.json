@@ -1,0 +1,162 @@
+{
+  "startedAt": "2026-05-17T09:26:53.942Z",
+  "profileDir": "C:\\Users\\86180\\AppData\\Roaming\\baoyu-skills\\chrome-profile",
+  "usedRealChromeClone": false,
+  "forceSharedProfile": true,
+  "articleTitle": "[诊断] X 长文识别 20260517172653",
+  "articleBody": "这是一次真实发布诊断。\n时间：2026-05-17T09:26:53.942Z\n目标：抓取真正的 Article 发布请求和返回，用来修复插件识别。",
+  "usedExistingChrome": false,
+  "requests": [
+    {
+      "requestId": "22008.150",
+      "url": "https://x.com/i/api/1.1/graphql/user_flow.json",
+      "method": "POST",
+      "requestBody": "category=perftown&log=%5B%7B%22description%22%3A%22rweb%3AcookiesMetadata%3Aload%22%2C%22product%22%3A%22rweb%22%2C%22event_value%22%3A117038877404%7D%5D",
+      "responseStatus": 200,
+      "responseBody": null
+    },
+    {
+      "requestId": "22008.151",
+      "url": "https://x.com/i/api/graphql/xF6sXnKJfS2AOylzxRjf6A/DataSaverMode?variables=%7B%22device_id%22%3A%22Windows%2FChrome%22%7D",
+      "method": "GET",
+      "requestBody": null,
+      "responseStatus": 200,
+      "responseBody": {
+        "data": "[object]"
+      }
+    },
+    {
+      "requestId": "22008.154",
+      "url": "https://x.com/i/api/1.1/graphql/user_flow.json",
+      "method": "POST",
+      "requestBody": "category=perftown&log=%5B%7B%22description%22%3A%22rweb%3Aseen_ids%3Apersistence%3Aget%3Asuccess%22%2C%22product%22%3A%22rweb%22%2C%22duration_ms%22%3A33%7D%2C%7B%22description%22%3A%22rweb%3Ainit%3AstorePrepare%22%2C%22product%22%3A%22rweb%22%2C%22duration_ms%22%3A8%7D%2C%7B%22description%22%3A%22rweb%3Attft%3AperfSupported%22%2C%22product%22%3A%22rweb%22%2C%22duration_ms%22%3A1%7D%2C%7B%22description%22%3A%22rweb%3Attft%3AperfSupported%3AJP%22%2C%22product%22%3A%22rweb%22%2C%22duration_ms%22%3A1%7D%2C%7B%22description%22%3A%22rweb%3Attft%3Aconnect%22%2C%22product%22%3A%22rweb%22%2C%22duration_ms%22%3A279%7D%2C%7B%22description%22%3A%22rweb%3Attft%3Aconnect%3AJP%22%2C%22product%22%3A%22rweb%22%2C%22duration_ms%22%3A279%7D%2C%7B%22description%22%3A%22rweb%3Attft%3Aprocess%22%2C%22product%22%3A%22rweb%22%2C%22duration_ms%22%3A408%7D%2C%7B%22description%22%3A%22rweb%3Attft%3Aprocess%3AJP%22%2C%22product%22%3A%22rweb%22%2C%22duration_ms%22%3A408%7D%2C%7B%22description%22%3A%22rweb%3Attft%3Aresponse%22%2C%22product%22%3A%22rweb%22%2C%22duration_ms%22%3A409%7D%2C%7B%22description%22%3A%22rweb%3Attft%3Aresponse%3AJP%22%2C%22product%22%3A%22rweb%22%2C%22duration_ms%22%3A409%7D%2C%7B%22description%22%3A%22rweb%3Attft%3Ainteractivity%22%2C%22product%22%3A%22rweb%22%2C%22duration_ms%22%3A1378%7D%2C%7B%22description%22%3A%22rweb%3Attft%3Ainteractivity%3AJP%22%2C%22product%22%3A%22rweb%22%2C%22duration_ms%22%3A1378%7D%5D",
+      "responseStatus": 200,
+      "responseBody": null
+    },
+    {
+      "requestId": "22008.161",
+      "url": "https://x.com/i/api/1.1/graphql/user_flow.json",
+      "method": "POST",
+      "requestBody": "debug=true&log=%5B%7B%22_category_%22%3A%22client_event%22%2C%22format_version%22%3A2%2C%22triggered_on%22%3A1779010018343%2C%22message%22%3A%22normal%2Fblue500%2Fdark%22%2C%22event_info%22%3A%22normal%2Fblue500%2Fdark%22%2C%22items%22%3A%5B%5D%2C%22event_namespace%22%3A%7B%22page%22%3A%22app%22%2C%22component%22%3A%22theme%22%2C%22action%22%3A%22launch%22%2C%22client%22%3A%22m5%22%7D%2C%22client_event_sequence_start_timestamp%22%3A1779010018343%2C%22client_event_sequence_number%22%3A0%2C%22client_app_id%22%3A%223033300%22%7D%5D",
+      "responseStatus": 200,
+      "responseBody": null
+    },
+    {
+      "requestId": "22008.171",
+      "url": "https://x.com/i/api/graphql/1KZj_GRTxmPaSrk8jIb1Yw/CreatorStudioTabBarItemQuery?variables=%7B%7D",
+      "method": "GET",
+      "requestBody": null,
+      "responseStatus": 200,
+      "responseBody": {
+        "data": "[object]"
+      }
+    },
+    {
+      "requestId": "22008.179",
+      "url": "https://x.com/i/api/graphql/N1zzFzRPspT-sP9Q42n_bg/ArticleEntitiesSlice?variables=%7B%22userId%22%3A%222015414226987384832%22%2C%22lifecycle%22%3A%22Draft%22%2C%22count%22%3A20%7D&features=%7B%22profile_label_improvements_pcf_label_in_post_enabled%22%3Atrue%2C%22responsive_web_profile_redirect_enabled%22%3Afalse%2C%22rweb_tipjar_consumption_enabled%22%3Afalse%2C%22verified_phone_label_enabled%22%3Afalse%2C%22responsive_web_graphql_skip_user_profile_image_extensions_enabled%22%3Afalse%2C%22responsive_web_graphql_timeline_navigation_enabled%22%3Atrue%7D",
+      "method": "GET",
+      "requestBody": null,
+      "responseStatus": 200,
+      "responseBody": {
+        "data": "[object]"
+      }
+    },
+    {
+      "requestId": "22008.191",
+      "url": "https://x.com/i/api/graphql/N1zzFzRPspT-sP9Q42n_bg/ArticleEntitiesSlice?variables=%7B%22cursor%22%3A%22DAACCgABAAAAAAAAAAAIAAIAAAABAAA%22%2C%22userId%22%3A%222015414226987384832%22%2C%22lifecycle%22%3A%22Draft%22%2C%22count%22%3A20%7D&features=%7B%22profile_label_improvements_pcf_label_in_post_enabled%22%3Atrue%2C%22responsive_web_profile_redirect_enabled%22%3Afalse%2C%22rweb_tipjar_consumption_enabled%22%3Afalse%2C%22verified_phone_label_enabled%22%3Afalse%2C%22responsive_web_graphql_skip_user_profile_image_extensions_enabled%22%3Afalse%2C%22responsive_web_graphql_timeline_navigation_enabled%22%3Atrue%7D",
+      "method": "GET",
+      "requestBody": null,
+      "responseStatus": 200,
+      "responseBody": {
+        "data": "[object]"
+      }
+    },
+    {
+      "requestId": "22008.192",
+      "url": "https://x.com/i/api/graphql/g1l5N8BxGewYuCy5USe_bQ/ArticleEntityDraftCreate",
+      "method": "POST",
+      "requestBody": {
+        "variables": "[object]",
+        "features": "[object]",
+        "queryId": "g1l5N8BxGewYuCy5USe_bQ"
+      },
+      "responseStatus": 200,
+      "responseBody": {
+        "data": "[object]"
+      }
+    },
+    {
+      "requestId": "22008.212",
+      "url": "https://x.com/i/api/1.1/graphql/user_flow.json",
+      "method": "POST",
+      "requestBody": "debug=true&log=%5B%7B%22_category_%22%3A%22client_event%22%2C%22format_version%22%3A2%2C%22triggered_on%22%3A1779010018343%2C%22event_info%22%3A%22xLarge%22%2C%22message%22%3A%22xLarge%22%2C%22items%22%3A%5B%5D%2C%22event_namespace%22%3A%7B%22page%22%3A%22app%22%2C%22component%22%3A%22breakpoint%22%2C%22action%22%3A%22launch%22%2C%22client%22%3A%22m5%22%7D%2C%22client_event_sequence_start_timestamp%22%3A1779010018343%2C%22client_event_sequence_number%22%3A1%2C%22client_app_id%22%3A%223033300%22%7D%2C%7B%22_category_%22%3A%22client_event%22%2C%22format_version%22%3A2%2C%22triggered_on%22%3A1779010018551%2C%22event_info%22%3A%22partner_id_sync_fail%3A%20Error%3A%20ApiError%3A%20https%3A%2F%2Fads-api.x.com%2F12%2Fmeasurement%2Fdcm_local_id%20HTTP-503%20codes%3A%5B1003%5D%22%2C%22event_namespace%22%3A%7B%22page%22%3A%22app%22%2C%22action%22%3A%22error%22%2C%22client%22%3A%22m5%22%7D%2C%22client_event_sequence_start_timestamp%22%3A1779010018343%2C%22client_event_sequence_number%22%3A2%2C%22client_app_id%22%3A%223033300%22%7D%2C%7B%22_category_%22%3A%22client_network_request_event%22%2C%22format_version%22%3A2%2C%22triggered_on%22%3A1779010018749%2C%22request%22%3A%7B%22uri_scheme%22%3A%22https%3A%22%2C%22uri_host_name%22%3A%22abs.twimg.com%22%2C%22uri_path%22%3A%22%2Fresponsive-web%2Fclient-web%2Fshared~bundle.TwitterArticles~bundle.SettingsExtendedProfile~bundle.WorkHistory~ondemand.Verified.6c8f916a.js%22%2C%22uri_query%22%3A%22%22%2C%22http_method%22%3A%22GET%22%2C%22http_status_code%22%3A200%2C%22start_time_ms%22%3A1779010018748%2C%22request_details%22%3A%7B%22duration_ms%22%3A9%2C%22rx_bytes%22%3A0%2C%22dns_ms%22%3A0%2C%22tcp_ms%22%3A0%2C%22response_body_size%22%3A0%2C%22ttfb_ms%22%3A0%2C%22ttlb_ms%22%3A2460%7D%7D%2C%22common_header%22%3A%7B%22commonHeader%22%3A%7B%22clientHeader%22%3A%7B%22timestampMs%22%3A1779010018748%2C%22timezoneOffsetMin%22%3A480%7D%7D%7D%2C%22network_measurements%22%3A%7B%22connection_type%22%3A%22unknown%22%2C%22speed_class%22%3A%223g%22%2C%22download_mbps%22%3A0.4%2C%22rtt_ms%22%3A350%2C%22reduced_data_usage%22%3Afalse%7D%2C%22event_type%22%3A%22cdn%3Aall%22%2C%22event_source%22%3A%22rweb%22%2C%22client_app_id%22%3A%223033300%22%7D%2C%7B%22_category_%22%3A%22client_event%22%2C%22format_version%22%3A2%2C%22triggered_on%22%3A1779010019563%2C%22items%22%3A%5B%5D%2C%22event_namespace%22%3A%7B%22page%22%3A%22article_composer%22%2C%22section%22%3A%22empty_state%22%2C%22element%22%3A%22create_button%22%2C%22action%22%3A%22click%22%2C%22client%22%3A%22m5%22%7D%2C%22client_event_sequence_start_timestamp%22%3A1779010018343%2C%22client_event_sequence_number%22%3A3%2C%22client_app_id%22%3A%223033300%22%7D%2C%7B%22_category_%22%3A%22client_event%22%2C%22format_version%22%3A2%2C%22triggered_on%22%3A1779010020167%2C%22items%22%3A%5B%5D%2C%22event_namespace%22%3A%7B%22page%22%3A%22longform_composer%22%2C%22section%22%3A%22notes_list%22%2C%22element%22%3A%22scroller%22%2C%22action%22%3A%22pin_to_top_attempt%22%2C%22client%22%3A%22m5%22%7D%2C%22client_event_sequence_start_timestamp%22%3A1779010018343%2C%22client_event_sequence_number%22%3A4%2C%22client_app_id%22%3A%223033300%22%7D%2C%7B%22_category_%22%3A%22client_event%22%2C%22format_version%22%3A2%2C%22triggered_on%22%3A1779010020291%2C%22note_details%22%3A%7B%22author_id%22%3A%222015414226987384832%22%2C%22is_note_author_follows_viewer%22%3Afalse%2C%22is_viewer_follows_note_author%22%3Afalse%2C%22note_id%22%3A%222055943149487538176%22%7D%2C%22items%22%3A%5B%5D%2C%22event_namespace%22%3A%7B%22page%22%3A%22article_composer%22%2C%22action%22%3A%22impression%22%2C%22client%22%3A%22m5%22%7D%2C%22client_event_sequence_start_timestamp%22%3A1779010018343%2C%22client_event_sequence_number%22%3A5%2C%22client_app_id%22%3A%223033300%22%7D%5D",
+      "responseStatus": 200,
+      "responseBody": null
+    },
+    {
+      "requestId": "22008.229",
+      "url": "https://x.com/i/api/graphql/mRmm_3aCzCcbpzBkhyhCDg/xChatDmSettingsQuery?variables=%7B%7D",
+      "method": "GET",
+      "requestBody": null,
+      "responseStatus": 200,
+      "responseBody": {
+        "data": "[object]"
+      }
+    },
+    {
+      "requestId": "22008.230",
+      "url": "https://x.com/i/api/graphql/zCYojd6h_gVXYjFlaAk4bA/useDirectCallSetupQuery?variables=%7B%7D",
+      "method": "GET",
+      "requestBody": null,
+      "responseStatus": 200,
+      "responseBody": {
+        "data": "[object]"
+      }
+    },
+    {
+      "requestId": "22008.231",
+      "url": "https://x.com/i/api/graphql/x75E2ABzm8_mGTg1bz8hcA/ArticleEntityUpdateTitle",
+      "method": "POST",
+      "requestBody": {
+        "variables": "[object]",
+        "features": "[object]",
+        "queryId": "x75E2ABzm8_mGTg1bz8hcA"
+      },
+      "responseStatus": 200,
+      "responseBody": {
+        "data": "[object]"
+      }
+    },
+    {
+      "requestId": "22008.311",
+      "url": "https://x.com/i/api/1.1/graphql/user_flow.json",
+      "method": "POST",
+      "requestBody": "debug=true&log=%5B%7B%22_category_%22%3A%22client_event%22%2C%22format_version%22%3A2%2C%22triggered_on%22%3A1779010026543%2C%22note_details%22%3A%7B%22author_id%22%3A%222015414226987384832%22%2C%22is_note_author_follows_viewer%22%3Afalse%2C%22is_viewer_follows_note_author%22%3Afalse%2C%22note_id%22%3A%222055943149487538176%22%7D%2C%22items%22%3A%5B%5D%2C%22event_namespace%22%3A%7B%22page%22%3A%22article-preview%22%2C%22component%22%3A%22article%22%2C%22action%22%3A%22impression%22%2C%22client%22%3A%22m5%22%7D%2C%22client_event_sequence_start_timestamp%22%3A1779010018343%2C%22client_event_sequence_number%22%3A6%2C%22client_app_id%22%3A%223033300%22%7D%5D",
+      "responseStatus": 200,
+      "responseBody": null
+    },
+    {
+      "requestId": "22008.314",
+      "url": "https://x.com/i/api/graphql/M7N2FrPrlOmu-YrVIBxFnQ/ArticleEntityUpdateContent",
+      "method": "POST",
+      "requestBody": {
+        "variables": "[object]",
+        "features": "[object]",
+        "queryId": "M7N2FrPrlOmu-YrVIBxFnQ"
+      },
+      "responseStatus": 200,
+      "responseBody": {
+        "data": "[object]"
+      }
+    },
+    {
+      "requestId": "22008.346",
+      "url": "https://x.com/i/api/1.1/graphql/user_flow.json",
+      "method": "POST",
+      "requestBody": "debug=true&log=%5B%7B%22_category_%22%3A%22client_event%22%2C%22format_version%22%3A2%2C%22triggered_on%22%3A1779010032572%2C%22duration_ms%22%3A16498%2C%22event_namespace%22%3A%7B%22page%22%3A%22app%22%2C%22action%22%3A%22become_inactive%22%2C%22client%22%3A%22m5%22%7D%2C%22client_event_sequence_start_timestamp%22%3A1779010018343%2C%22client_event_sequence_number%22%3A7%2C%22client_app_id%22%3A%223033300%22%7D%5D",
+      "responseStatus": 200,
+      "responseBody": null
+    }
+  ],
+  "finalUrl": "https://x.com/compose/articles/edit/2055943149487538176/preview"
+}

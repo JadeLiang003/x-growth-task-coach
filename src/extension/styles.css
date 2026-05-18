@@ -1,0 +1,198 @@
+@import '../index.css';
+
+:root {
+  color: #000000;
+  background:
+    radial-gradient(circle at top left, rgba(207, 218, 245, 0.9), transparent 34%),
+    linear-gradient(180deg, #f6f3f1 0%, #f3efea 100%);
+  font-family:
+    'IBM Plex Mono',
+    'SFMono-Regular',
+    Consolas,
+    monospace;
+}
+
+body {
+  margin: 0;
+  min-width: 360px;
+  color: #000000;
+  background: transparent;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.coach-shell {
+  min-height: 100vh;
+  background:
+    linear-gradient(145deg, rgba(246, 243, 241, 0.96), rgba(255, 255, 255, 0.92)),
+    radial-gradient(circle at top left, rgba(207, 218, 245, 0.48), transparent 32%);
+}
+
+.coach-panel {
+  border: 1px solid rgba(36, 36, 36, 0.12);
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+
+.coach-badge {
+  border: 1px solid rgba(36, 36, 36, 0.08);
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.coach-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.coach-grid.two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.coach-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #797776;
+}
+
+.coach-input,
+.coach-select {
+  width: 100%;
+  border-radius: 16px;
+  border: 1px solid rgba(36, 36, 36, 0.12);
+  background: rgba(255, 255, 255, 0.92);
+  padding: 12px 14px;
+  font-size: 14px;
+  color: #242424;
+}
+
+.coach-input:focus,
+.coach-select:focus {
+  outline: 2px solid rgba(207, 218, 245, 0.72);
+  border-color: rgba(36, 36, 36, 0.2);
+}
+
+.coach-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    background-color 160ms ease;
+}
+
+.coach-button:hover {
+  transform: translateY(-1px);
+}
+
+.coach-button.primary {
+  background: #242424;
+  color: #f6f3f1;
+  box-shadow: 0 10px 24px rgba(36, 36, 36, 0.14);
+}
+
+.coach-button.secondary {
+  background: rgba(255, 255, 255, 0.92);
+  color: #242424;
+  border-color: rgba(36, 36, 36, 0.12);
+}
+
+.coach-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(36, 36, 36, 0.08);
+  background: rgba(255, 255, 255, 0.72);
+  padding: 12px 14px;
+}
+
+.coach-checkbox-list {
+  display: grid;
+  gap: 10px;
+}
+
+.coach-checkbox-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 16px;
+  border: 1px solid rgba(36, 36, 36, 0.08);
+  background: rgba(255, 255, 255, 0.74);
+  padding: 12px 14px;
+}
+
+.coach-status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.coach-status-dot.online {
+  background: #0f9d58;
+  box-shadow: 0 0 0 6px rgba(15, 157, 88, 0.15);
+}
+
+.coach-status-dot.offline {
+  background: #d93025;
+  box-shadow: 0 0 0 6px rgba(217, 48, 37, 0.12);
+}
+
+.coach-progress-rail {
+  overflow: hidden;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(36, 36, 36, 0.08);
+}
+
+.coach-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #242424 0%, #4e4d4d 52%, #cfdaf5 100%);
+  transition: width 180ms ease;
+}
+
+.coach-task-card {
+  border: 1px solid rgba(36, 36, 36, 0.08);
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.coach-stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.coach-stepper-button {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 1px solid rgba(36, 36, 36, 0.12);
+  background: rgba(255, 255, 255, 0.92);
+  color: #242424;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.coach-stepper-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}

@@ -1,0 +1,201 @@
+{
+  "startedAt": "2026-05-17T09:57:50.695Z",
+  "profileDir": "C:\\Users\\86180\\AppData\\Local\\Temp\\x-growth-real-profile-1779011866332",
+  "usedRealChromeClone": true,
+  "forceSharedProfile": false,
+  "articleTitle": "[诊断] X 长文识别 20260517175750",
+  "articleBody": "这是一次真实发布诊断。\n时间：2026-05-17T09:57:50.695Z\n目标：抓取真正的 Article 发布请求和返回，用来修复插件识别。",
+  "usedExistingChrome": false,
+  "requests": [],
+  "finalUrl": "",
+  "failedStage": "wait-title-input",
+  "pageDiagnostics": {
+    "url": "https://x.com/i/flow/login?redirect_after_login=%2Fcompose%2Farticles",
+    "bodyText": "出错了。请尝试重新加载。\n重试\n正发生\n现在就加入。\n使用 Apple 注册\n或\n创建账号\n注册即表示同意服务条款及隐私政策，其中包括 Cookie 使用条款。\n已有账号?\n登录\n获取 Grok\n关于\n |\n下载 X 应用\n |\nGrok\n |\n帮助中心\n |\n服务条款\n |\n隐私政策\n |\nCookie 政策\n |\n辅助功能\n |\n广告信息\n |\n博客\n |\n职业\n |\n品牌资源\n |\n广告\n |\n市场营销\n |\n企业版 X\n |\n开发者\n |\n新闻\n |\n设置\n |\n© 2026 X Corp.",
+    "buttons": [
+      {
+        "text": "重试",
+        "aria": "",
+        "role": "button",
+        "href": "",
+        "testid": ""
+      },
+      {
+        "text": "使用 Apple 注册",
+        "aria": "",
+        "role": "button",
+        "href": "",
+        "testid": "apple_sign_in_button"
+      },
+      {
+        "text": "创建账号",
+        "aria": "",
+        "role": "link",
+        "href": "/i/flow/signup",
+        "testid": "signupButton"
+      },
+      {
+        "text": "服务条款",
+        "aria": "",
+        "role": "link",
+        "href": "https://x.com/tos",
+        "testid": ""
+      },
+      {
+        "text": "隐私政策",
+        "aria": "",
+        "role": "link",
+        "href": "https://x.com/privacy",
+        "testid": ""
+      },
+      {
+        "text": "Cookie 使用条款",
+        "aria": "",
+        "role": "link",
+        "href": "https://help.x.com/rules-and-policies/twitter-cookies",
+        "testid": ""
+      },
+      {
+        "text": "登录",
+        "aria": "",
+        "role": "link",
+        "href": "/login",
+        "testid": "loginButton"
+      },
+      {
+        "text": "获取 Grok",
+        "aria": "",
+        "role": "link",
+        "href": "https://grok.com/",
+        "testid": ""
+      },
+      {
+        "text": "关于",
+        "aria": "",
+        "role": "link",
+        "href": "https://about.x.com",
+        "testid": ""
+      },
+      {
+        "text": "下载 X 应用",
+        "aria": "",
+        "role": "link",
+        "href": "https://help.x.com/using-x/download-the-x-app",
+        "testid": ""
+      },
+      {
+        "text": "Grok",
+        "aria": "",
+        "role": "link",
+        "href": "https://grok.com/",
+        "testid": ""
+      },
+      {
+        "text": "帮助中心",
+        "aria": "",
+        "role": "link",
+        "href": "https://help.x.com",
+        "testid": ""
+      },
+      {
+        "text": "服务条款",
+        "aria": "",
+        "role": "link",
+        "href": "https://x.com/tos",
+        "testid": ""
+      },
+      {
+        "text": "隐私政策",
+        "aria": "",
+        "role": "link",
+        "href": "https://x.com/privacy",
+        "testid": ""
+      },
+      {
+        "text": "Cookie 政策",
+        "aria": "",
+        "role": "link",
+        "href": "https://support.x.com/articles/20170514",
+        "testid": ""
+      },
+      {
+        "text": "辅助功能",
+        "aria": "",
+        "role": "link",
+        "href": "https://help.x.com/resources/accessibility",
+        "testid": ""
+      },
+      {
+        "text": "广告信息",
+        "aria": "",
+        "role": "link",
+        "href": "https://business.x.com/en/help/troubleshooting/how-twitter-ads-work.html?ref=web-twc-ao-gbl-adsinfo&utm_source=twc&utm_medium=web&utm_campaign=ao&utm_content=adsinfo",
+        "testid": ""
+      },
+      {
+        "text": "博客",
+        "aria": "",
+        "role": "link",
+        "href": "https://blog.x.com",
+        "testid": ""
+      },
+      {
+        "text": "职业",
+        "aria": "",
+        "role": "link",
+        "href": "https://careers.x.com",
+        "testid": ""
+      },
+      {
+        "text": "品牌资源",
+        "aria": "",
+        "role": "link",
+        "href": "https://about.x.com/press/brand-assets",
+        "testid": ""
+      },
+      {
+        "text": "广告",
+        "aria": "",
+        "role": "link",
+        "href": "https://ads.x.com/?ref=gl-tw-tw-twitter-advertise",
+        "testid": ""
+      },
+      {
+        "text": "市场营销",
+        "aria": "",
+        "role": "link",
+        "href": "https://marketing.x.com",
+        "testid": ""
+      },
+      {
+        "text": "企业版 X",
+        "aria": "",
+        "role": "link",
+        "href": "https://business.x.com/?ref=web-twc-ao-gbl-twitterforbusiness&utm_source=twc&utm_medium=web&utm_campaign=ao&utm_content=twitterforbusiness",
+        "testid": ""
+      },
+      {
+        "text": "开发者",
+        "aria": "",
+        "role": "link",
+        "href": "https://developer.x.com",
+        "testid": ""
+      },
+      {
+        "text": "新闻",
+        "aria": "",
+        "role": "link",
+        "href": "https://x.com/i/jf/stories/home",
+        "testid": ""
+      },
+      {
+        "text": "设置",
+        "aria": "",
+        "role": "link",
+        "href": "/settings",
+        "testid": ""
+      }
+    ],
+    "editableNodes": []
+  }
+}

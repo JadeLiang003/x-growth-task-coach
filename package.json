@@ -10,7 +10,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "npm run build:extension",
+    "build:userscript": "tsc && vite build",
+    "build:extension": "tsc && vite build -c vite.extension.config.ts",
     "prepare": "husky",
     "lint": "eslint .",
     "commitlint": "commitlint --edit",

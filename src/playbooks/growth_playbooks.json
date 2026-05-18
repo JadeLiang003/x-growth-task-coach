@@ -1,0 +1,853 @@
+{
+  "version": "1.0.0",
+  "updatedAt": "2026-05-14",
+  "applicability": {
+    "coreRange": "0-5k followers",
+    "compatibleRange": "5k-10k followers",
+    "notPrimary": "10k+ mature accounts"
+  },
+  "taskCatalog": {
+    "originalPosts": {
+      "label": "原创帖",
+      "unit": "posts",
+      "period": "daily",
+      "trackingMode": "mixed",
+      "category": "posting"
+    },
+    "shortContentPosts": {
+      "label": "短内容输出",
+      "unit": "posts",
+      "period": "daily",
+      "trackingMode": "mixed",
+      "category": "posting"
+    },
+    "shortPosts": {
+      "label": "短推",
+      "unit": "posts",
+      "period": "daily",
+      "trackingMode": "mixed",
+      "category": "posting"
+    },
+    "threadPosts": {
+      "label": "线程",
+      "unit": "threads",
+      "period": "daily",
+      "trackingMode": "mixed",
+      "category": "posting"
+    },
+    "longFormPosts": {
+      "label": "长文",
+      "unit": "posts",
+      "period": "daily",
+      "trackingMode": "mixed",
+      "category": "posting"
+    },
+    "highQualityReplies": {
+      "label": "高质量回复",
+      "unit": "replies",
+      "period": "daily",
+      "trackingMode": "mixed",
+      "category": "interaction"
+    },
+    "bigCreatorInteractions": {
+      "label": "大 V 互动",
+      "unit": "accounts",
+      "period": "daily",
+      "trackingMode": "mixed",
+      "category": "interaction"
+    },
+    "peerInteractions": {
+      "label": "同生态互动",
+      "unit": "accounts",
+      "period": "daily",
+      "trackingMode": "mixed",
+      "category": "interaction"
+    },
+    "quotePosts": {
+      "label": "引用转发",
+      "unit": "posts",
+      "period": "daily",
+      "trackingMode": "mixed",
+      "category": "posting"
+    },
+    "contentIdeasCaptured": {
+      "label": "选题收集",
+      "unit": "ideas",
+      "period": "daily",
+      "trackingMode": "manual",
+      "category": "research"
+    },
+    "dailyReview": {
+      "label": "当日复盘",
+      "unit": "times",
+      "period": "daily",
+      "trackingMode": "manual",
+      "category": "review"
+    },
+    "foundationTasks": {
+      "label": "基础建设任务",
+      "unit": "tasks",
+      "period": "daily",
+      "trackingMode": "manual",
+      "category": "foundation"
+    },
+    "benchmarkDistillation": {
+      "label": "对标拆解",
+      "unit": "accounts",
+      "period": "daily",
+      "trackingMode": "manual",
+      "category": "benchmarking"
+    },
+    "contentSuggestionConsumed": {
+      "label": "内容建议消化",
+      "unit": "times",
+      "period": "daily",
+      "trackingMode": "manual",
+      "category": "content"
+    },
+    "contentPillarsDefined": {
+      "label": "内容支柱定义",
+      "unit": "times",
+      "period": "weekly",
+      "trackingMode": "manual",
+      "category": "foundation"
+    },
+    "benchmarkAccountsCollected": {
+      "label": "收集对标账号",
+      "unit": "accounts",
+      "period": "weekly",
+      "trackingMode": "manual",
+      "category": "research"
+    },
+    "searchTemplatesCreated": {
+      "label": "新建搜索模板",
+      "unit": "templates",
+      "period": "weekly",
+      "trackingMode": "manual",
+      "category": "foundation"
+    },
+    "accountPoolCreated": {
+      "label": "账号池初始化",
+      "unit": "times",
+      "period": "weekly",
+      "trackingMode": "manual",
+      "category": "foundation"
+    },
+    "seedPostsPrepared": {
+      "label": "种子内容准备",
+      "unit": "posts",
+      "period": "weekly",
+      "trackingMode": "manual",
+      "category": "content"
+    },
+    "weeklyReview": {
+      "label": "周复盘",
+      "unit": "times",
+      "period": "weekly",
+      "trackingMode": "manual",
+      "category": "review"
+    },
+    "highValuePosts": {
+      "label": "高价值主帖",
+      "unit": "posts",
+      "period": "weekly",
+      "trackingMode": "manual",
+      "category": "posting"
+    },
+    "benchmarkAccountsReviewed": {
+      "label": "完成对标复盘的账号",
+      "unit": "accounts",
+      "period": "weekly",
+      "trackingMode": "manual",
+      "category": "benchmarking"
+    },
+    "bestInteractionPatternsReviewed": {
+      "label": "最佳互动模式复盘",
+      "unit": "patterns",
+      "period": "weekly",
+      "trackingMode": "manual",
+      "category": "review"
+    },
+    "searchTemplateAdjustments": {
+      "label": "搜索模板调整",
+      "unit": "times",
+      "period": "weekly",
+      "trackingMode": "manual",
+      "category": "research"
+    },
+    "viralPostsDistilled": {
+      "label": "爆款提炼",
+      "unit": "posts",
+      "period": "weekly",
+      "trackingMode": "manual",
+      "category": "benchmarking"
+    },
+    "contentMixAdjustment": {
+      "label": "内容配比调整",
+      "unit": "times",
+      "period": "weekly",
+      "trackingMode": "manual",
+      "category": "review"
+    },
+    "validatedPatternCount": {
+      "label": "已验证内容模式",
+      "unit": "patterns",
+      "period": "weekly",
+      "trackingMode": "manual",
+      "category": "review"
+    },
+    "nextWeekPlanCreated": {
+      "label": "下周计划生成",
+      "unit": "times",
+      "period": "weekly",
+      "trackingMode": "manual",
+      "category": "review"
+    }
+  },
+  "stagePlaybooks": [
+    {
+      "id": "setup_foundation",
+      "name": "准备期",
+      "suitableUsers": [
+        "new_account",
+        "repositioning_account",
+        "low_clarity_account"
+      ],
+      "suitableFollowerStage": "pre-launch",
+      "description": "先把定位、内容支柱、搜索模板、账号池和记录系统搭起来，再进入正式冷启动。",
+      "primaryGoal": "clarify_direction_and_build_system",
+      "recommendedOverlayIds": [
+        "build_in_public",
+        "ai_creator",
+        "indie_hacker"
+      ],
+      "dailyTargets": {
+        "originalPosts": 0,
+        "highQualityReplies": 0,
+        "bigCreatorInteractions": 0,
+        "peerInteractions": 0,
+        "quotePosts": 0,
+        "contentIdeasCaptured": 5,
+        "dailyReview": 1,
+        "foundationTasks": 1
+      },
+      "weeklyTargets": {
+        "contentPillarsDefined": 1,
+        "benchmarkAccountsCollected": 10,
+        "searchTemplatesCreated": 6,
+        "accountPoolCreated": 1,
+        "seedPostsPrepared": 7,
+        "weeklyReview": 1
+      },
+      "adjustableTaskKeys": [
+        "contentIdeasCaptured",
+        "foundationTasks",
+        "benchmarkAccountsCollected",
+        "seedPostsPrepared"
+      ],
+      "intensityPresets": {
+        "conservative": {
+          "dailyTargets": {
+            "contentIdeasCaptured": 3,
+            "dailyReview": 1,
+            "foundationTasks": 1
+          },
+          "weeklyTargets": {
+            "benchmarkAccountsCollected": 6,
+            "searchTemplatesCreated": 4,
+            "seedPostsPrepared": 4
+          }
+        },
+        "standard": {
+          "dailyTargets": {
+            "contentIdeasCaptured": 5,
+            "dailyReview": 1,
+            "foundationTasks": 1
+          },
+          "weeklyTargets": {
+            "benchmarkAccountsCollected": 10,
+            "searchTemplatesCreated": 6,
+            "seedPostsPrepared": 7
+          }
+        },
+        "aggressive": {
+          "dailyTargets": {
+            "contentIdeasCaptured": 8,
+            "dailyReview": 1,
+            "foundationTasks": 2
+          },
+          "weeklyTargets": {
+            "benchmarkAccountsCollected": 15,
+            "searchTemplatesCreated": 8,
+            "seedPostsPrepared": 10
+          }
+        }
+      },
+      "taskMix": {
+        "foundation": 0.45,
+        "research": 0.25,
+        "contentPreparation": 0.20,
+        "review": 0.10
+      },
+      "qualityRules": [
+        "内容支柱必须收敛到 2-4 个，不能无限发散。",
+        "每个搜索模板都要有明确目的，不能只存一堆空查询。",
+        "账号池里的账号必须可解释：为什么要跟、为什么要学、为什么要互动。"
+      ],
+      "riskWarnings": [
+        "不要急着追热点。",
+        "不要还没准备好就模仿中后期打法。",
+        "不要在定位没清楚时大量发帖。"
+      ],
+      "stageEntrySignals": [
+        "用户是新号",
+        "用户正在重做定位",
+        "内容支柱和搜索模板都还没建立"
+      ],
+      "stageExitSignals": [
+        "内容支柱已明确",
+        "搜索模板已建立",
+        "账号池已建立",
+        "最近 7 天能稳定完成最小动作"
+      ],
+      "scoreWeights": {
+        "foundationCompletion": 0.45,
+        "researchCompletion": 0.25,
+        "seedContentPrepared": 0.20,
+        "reviewCompletion": 0.10
+      }
+    },
+    {
+      "id": "cold_start_0_100",
+      "name": "冷启动期 0-100",
+      "suitableUsers": [
+        "new_account",
+        "early_stage_creator",
+        "early_stage_indie_hacker"
+      ],
+      "suitableFollowerStage": "0-100 followers",
+      "description": "先让别人认识你、看懂你、和你发生第一批真实互动。",
+      "primaryGoal": "get_first_feedback_and_initial_visibility",
+      "recommendedOverlayIds": [
+        "indie_hacker",
+        "build_in_public",
+        "ai_creator"
+      ],
+      "dailyTargets": {
+        "shortContentPosts": 2,
+        "longFormPosts": 0,
+        "highQualityReplies": 8,
+        "bigCreatorInteractions": 2,
+        "peerInteractions": 2,
+        "quotePosts": 1,
+        "contentIdeasCaptured": 4,
+        "dailyReview": 1
+      },
+      "weeklyTargets": {
+        "highValuePosts": 2,
+        "benchmarkAccountsReviewed": 3,
+        "bestInteractionPatternsReviewed": 2,
+        "searchTemplateAdjustments": 1,
+        "weeklyReview": 1
+      },
+      "adjustableTaskKeys": [
+        "shortContentPosts",
+        "longFormPosts",
+        "highQualityReplies",
+        "bigCreatorInteractions",
+        "peerInteractions",
+        "quotePosts",
+        "contentIdeasCaptured"
+      ],
+      "intensityPresets": {
+        "conservative": {
+          "dailyTargets": {
+            "shortContentPosts": 1,
+            "longFormPosts": 0,
+            "highQualityReplies": 5,
+            "bigCreatorInteractions": 1,
+            "peerInteractions": 1,
+            "quotePosts": 0,
+            "contentIdeasCaptured": 3,
+            "dailyReview": 1
+          }
+        },
+        "standard": {
+          "dailyTargets": {
+            "shortContentPosts": 2,
+            "longFormPosts": 0,
+            "highQualityReplies": 8,
+            "bigCreatorInteractions": 2,
+            "peerInteractions": 2,
+            "quotePosts": 1,
+            "contentIdeasCaptured": 4,
+            "dailyReview": 1
+          }
+        },
+        "aggressive": {
+          "dailyTargets": {
+            "shortContentPosts": 3,
+            "longFormPosts": 1,
+            "highQualityReplies": 12,
+            "bigCreatorInteractions": 3,
+            "peerInteractions": 3,
+            "quotePosts": 1,
+            "contentIdeasCaptured": 5,
+            "dailyReview": 1
+          }
+        }
+      },
+      "taskMix": {
+        "posting": 0.25,
+        "interaction": 0.40,
+        "research": 0.15,
+        "review": 0.20
+      },
+      "qualityRules": [
+        "高质量回复必须补充观点、经验、案例或问题，不能只是彩虹屁。",
+        "原创帖必须围绕既定内容支柱，不允许每天换方向。",
+        "引用转发必须带自己的判断，而不是单纯转发。"
+      ],
+      "riskWarnings": [
+        "不要只做回复不发主帖。",
+        "不要今天一个方向、明天一个方向。",
+        "不要把互动做成模板化灌水。"
+      ],
+      "stageEntrySignals": [
+        "已完成准备期",
+        "粉丝接近 0",
+        "开始正式执行起号动作"
+      ],
+      "stageExitSignals": [
+        "粉丝接近 100",
+        "近 30 天净涨粉接近 80-100",
+        "已经找到第一批有效互动对象",
+        "已经看出哪些内容更容易被看见"
+      ],
+      "scoreWeights": {
+        "postTargetRate": 0.30,
+        "interactionTargetRate": 0.35,
+        "ideaCaptureRate": 0.10,
+        "reviewCompletionRate": 0.15,
+        "consistencyScore": 0.10
+      }
+    },
+    {
+      "id": "growth_100_1000",
+      "name": "验证期 100-1000",
+      "suitableUsers": [
+        "early_growth_creator",
+        "build_in_public_account",
+        "ai_creator"
+      ],
+      "suitableFollowerStage": "100-1000 followers",
+      "description": "验证什么内容能稳定带粉，开始形成自己的可复用内容公式。",
+      "primaryGoal": "validate_repeatable_growth_patterns",
+      "recommendedOverlayIds": [
+        "build_in_public",
+        "ai_creator",
+        "indie_hacker"
+      ],
+      "dailyTargets": {
+        "shortContentPosts": 2,
+        "longFormPosts": 0,
+        "highQualityReplies": 8,
+        "bigCreatorInteractions": 1,
+        "peerInteractions": 3,
+        "quotePosts": 1,
+        "contentIdeasCaptured": 3,
+        "dailyReview": 1,
+        "benchmarkDistillation": 1
+      },
+      "weeklyTargets": {
+        "highValuePosts": 3,
+        "benchmarkAccountsReviewed": 4,
+        "viralPostsDistilled": 5,
+        "weeklyReview": 1,
+        "contentMixAdjustment": 1,
+        "validatedPatternCount": 2
+      },
+      "adjustableTaskKeys": [
+        "shortContentPosts",
+        "longFormPosts",
+        "highQualityReplies",
+        "bigCreatorInteractions",
+        "peerInteractions",
+        "quotePosts",
+        "contentIdeasCaptured",
+        "benchmarkDistillation"
+      ],
+      "intensityPresets": {
+        "conservative": {
+          "dailyTargets": {
+            "shortContentPosts": 1,
+            "longFormPosts": 0,
+            "highQualityReplies": 5,
+            "bigCreatorInteractions": 1,
+            "peerInteractions": 2,
+            "quotePosts": 0,
+            "contentIdeasCaptured": 2,
+            "dailyReview": 1,
+            "benchmarkDistillation": 0
+          },
+          "weeklyTargets": {
+            "highValuePosts": 2,
+            "benchmarkAccountsReviewed": 3,
+            "viralPostsDistilled": 3,
+            "validatedPatternCount": 1
+          }
+        },
+        "standard": {
+          "dailyTargets": {
+            "shortContentPosts": 2,
+            "longFormPosts": 0,
+            "highQualityReplies": 8,
+            "bigCreatorInteractions": 1,
+            "peerInteractions": 3,
+            "quotePosts": 1,
+            "contentIdeasCaptured": 3,
+            "dailyReview": 1,
+            "benchmarkDistillation": 1
+          },
+          "weeklyTargets": {
+            "highValuePosts": 3,
+            "benchmarkAccountsReviewed": 4,
+            "viralPostsDistilled": 5,
+            "validatedPatternCount": 2
+          }
+        },
+        "aggressive": {
+          "dailyTargets": {
+            "shortContentPosts": 3,
+            "longFormPosts": 1,
+            "highQualityReplies": 12,
+            "bigCreatorInteractions": 2,
+            "peerInteractions": 4,
+            "quotePosts": 1,
+            "contentIdeasCaptured": 4,
+            "dailyReview": 1,
+            "benchmarkDistillation": 1
+          },
+          "weeklyTargets": {
+            "highValuePosts": 4,
+            "benchmarkAccountsReviewed": 5,
+            "viralPostsDistilled": 6,
+            "validatedPatternCount": 3
+          }
+        }
+      },
+      "taskMix": {
+        "posting": 0.35,
+        "interaction": 0.25,
+        "benchmarking": 0.20,
+        "review": 0.20
+      },
+      "qualityRules": [
+        "每周至少产出 2-4 条明确可被定义为高价值的内容。",
+        "高价值内容必须有明确结论、过程、证据或行动点。",
+        "回复量不能继续无上限增加，必须开始关注回复占比。"
+      ],
+      "riskWarnings": [
+        "不要把账号做成回复号。",
+        "不要只看曝光，不看带粉能力。",
+        "不要看到谁火就频繁换表达方式。"
+      ],
+      "stageEntrySignals": [
+        "粉丝超过 100",
+        "已有基础互动",
+        "已经具备初步内容方向"
+      ],
+      "stageExitSignals": [
+        "粉丝接近 1000",
+        "至少有 2 个已验证内容模式",
+        "原创内容开始稳定带来关注",
+        "增长不再主要依赖回复"
+      ],
+      "scoreWeights": {
+        "postTargetRate": 0.35,
+        "interactionTargetRate": 0.20,
+        "benchmarkCompletionRate": 0.20,
+        "reviewCompletionRate": 0.15,
+        "consistencyScore": 0.10
+      }
+    },
+    {
+      "id": "scale_1000_5000",
+      "name": "起飞期 1000-5000",
+      "suitableUsers": [
+        "growing_creator",
+        "ai_creator",
+        "indie_hacker"
+      ],
+      "suitableFollowerStage": "1000-5000 followers",
+      "description": "把已验证有效的内容模式持续放大，逐步从互动驱动转向内容驱动。",
+      "primaryGoal": "scale_working_content_patterns",
+      "recommendedOverlayIds": [
+        "ai_creator",
+        "indie_hacker",
+        "build_in_public"
+      ],
+      "dailyTargets": {
+        "shortPosts": 1,
+        "threadPosts": 1,
+        "longFormPosts": 0,
+        "highQualityReplies": 8,
+        "bigCreatorInteractions": 1,
+        "peerInteractions": 2,
+        "quotePosts": 0,
+        "contentIdeasCaptured": 2,
+        "dailyReview": 1,
+        "contentSuggestionConsumed": 1
+      },
+      "weeklyTargets": {
+        "highValuePosts": 3,
+        "benchmarkAccountsReviewed": 3,
+        "viralPostsDistilled": 4,
+        "weeklyReview": 1,
+        "nextWeekPlanCreated": 1,
+        "validatedPatternCount": 3
+      },
+      "adjustableTaskKeys": [
+        "shortPosts",
+        "threadPosts",
+        "longFormPosts",
+        "highQualityReplies",
+        "bigCreatorInteractions",
+        "peerInteractions",
+        "contentIdeasCaptured",
+        "contentSuggestionConsumed"
+      ],
+      "intensityPresets": {
+        "conservative": {
+          "dailyTargets": {
+            "shortPosts": 1,
+            "threadPosts": 0,
+            "longFormPosts": 0,
+            "highQualityReplies": 5,
+            "bigCreatorInteractions": 0,
+            "peerInteractions": 1,
+            "quotePosts": 0,
+            "contentIdeasCaptured": 1,
+            "dailyReview": 1,
+            "contentSuggestionConsumed": 1
+          },
+          "weeklyTargets": {
+            "highValuePosts": 2,
+            "benchmarkAccountsReviewed": 2,
+            "viralPostsDistilled": 3,
+            "validatedPatternCount": 2
+          }
+        },
+        "standard": {
+          "dailyTargets": {
+            "shortPosts": 1,
+            "threadPosts": 1,
+            "longFormPosts": 0,
+            "highQualityReplies": 8,
+            "bigCreatorInteractions": 1,
+            "peerInteractions": 2,
+            "quotePosts": 0,
+            "contentIdeasCaptured": 2,
+            "dailyReview": 1,
+            "contentSuggestionConsumed": 1
+          },
+          "weeklyTargets": {
+            "highValuePosts": 3,
+            "benchmarkAccountsReviewed": 3,
+            "viralPostsDistilled": 4,
+            "validatedPatternCount": 3
+          }
+        },
+        "aggressive": {
+          "dailyTargets": {
+            "shortPosts": 2,
+            "threadPosts": 1,
+            "longFormPosts": 1,
+            "highQualityReplies": 12,
+            "bigCreatorInteractions": 1,
+            "peerInteractions": 3,
+            "quotePosts": 0,
+            "contentIdeasCaptured": 3,
+            "dailyReview": 1,
+            "contentSuggestionConsumed": 1
+          },
+          "weeklyTargets": {
+            "highValuePosts": 4,
+            "benchmarkAccountsReviewed": 4,
+            "viralPostsDistilled": 5,
+            "validatedPatternCount": 4
+          }
+        }
+      },
+      "taskMix": {
+        "posting": 0.45,
+        "interaction": 0.15,
+        "benchmarking": 0.15,
+        "review": 0.25
+      },
+      "qualityRules": [
+        "高价值主帖必须有真实结果、过程、踩坑或可复制步骤中的至少两项。",
+        "每周必须完成一次对标蒸馏和一次周复盘。",
+        "互动要服务于内容分发，不能重新变成主增长引擎。"
+      ],
+      "riskWarnings": [
+        "不要继续沿用冷启动期的高互动惯性。",
+        "不要盲目固定发帖时段。",
+        "不要把某一种内容形式当成唯一答案。"
+      ],
+      "stageEntrySignals": [
+        "粉丝超过 1000",
+        "已经验证出初步有效内容模式",
+        "开始具备内容放大条件"
+      ],
+      "stageExitSignals": [
+        "粉丝接近 5000",
+        "连续 1-2 个月稳定增长",
+        "已形成 3 个以上有效内容模式",
+        "增长主要来自主帖和系列内容"
+      ],
+      "scoreWeights": {
+        "highValuePostRate": 0.40,
+        "interactionTargetRate": 0.15,
+        "benchmarkCompletionRate": 0.15,
+        "reviewCompletionRate": 0.20,
+        "consistencyScore": 0.10
+      }
+    }
+  ],
+  "personaOverlays": [
+    {
+      "id": "build_in_public",
+      "name": "Build in Public",
+      "description": "用公开进展、真实决策、过程变化和结果复盘建立长期可信度。",
+      "contentPillars": [
+        "project_updates",
+        "decision_logs",
+        "build_lessons",
+        "weekly_reflections"
+      ],
+      "contentFormats": [
+        "text_thread",
+        "progress_card",
+        "weekly_review_post"
+      ],
+      "topicSuggestions": [
+        "这周做了什么",
+        "为什么这样做",
+        "哪里踩坑了",
+        "下周准备怎么改"
+      ],
+      "toneRules": [
+        "真实、不装懂、少空话",
+        "强调过程中的决策与变化",
+        "用进展和数据建立可信度"
+      ],
+      "benchmarkPreference": [
+        "build_in_public_creator",
+        "indie_hacker",
+        "developer_storyteller"
+      ],
+      "templateBias": {
+        "resultTrack": 0.35,
+        "processTrack": 0.45,
+        "distributionTrack": 0.20
+      }
+    },
+    {
+      "id": "ai_creator",
+      "name": "AI Creator",
+      "description": "围绕 AI 工具、自动化、实验、提示词、工作流和真实落地案例输出内容。",
+      "contentPillars": [
+        "tool_breakdown",
+        "workflow_automation",
+        "prompting_lessons",
+        "real_world_experiments"
+      ],
+      "contentFormats": [
+        "tutorial",
+        "experiment_report",
+        "before_after_case",
+        "workflow_card"
+      ],
+      "topicSuggestions": [
+        "这个工具解决了什么问题",
+        "为什么这个工作流比之前更好",
+        "真实测试结果如何",
+        "别人怎么照着做"
+      ],
+      "toneRules": [
+        "减少泛知识搬运",
+        "优先讲真实使用结果",
+        "强调可复现步骤和边界"
+      ],
+      "benchmarkPreference": [
+        "ai_builder",
+        "automation_creator",
+        "prompt_engineer"
+      ],
+      "templateBias": {
+        "resultTrack": 0.40,
+        "processTrack": 0.35,
+        "distributionTrack": 0.25
+      }
+    },
+    {
+      "id": "indie_hacker",
+      "name": "Indie Hacker",
+      "description": "围绕产品、盈利、试错、增长、用户反馈和个人创业进展输出内容。",
+      "contentPillars": [
+        "product_building",
+        "revenue_progress",
+        "user_feedback",
+        "growth_experiments"
+      ],
+      "contentFormats": [
+        "progress_post",
+        "problem_solution_post",
+        "retrospective",
+        "quote_with_take"
+      ],
+      "topicSuggestions": [
+        "今天解决了哪个真实问题",
+        "用户反馈怎么改变了产品",
+        "这次实验结果如何",
+        "哪些动作真带来了增长"
+      ],
+      "toneRules": [
+        "少神话，多记录",
+        "强调真实产品和真实用户",
+        "尽量用结果和过程，而不是空泛观点"
+      ],
+      "benchmarkPreference": [
+        "indie_hacker",
+        "saas_builder",
+        "build_in_public_creator"
+      ],
+      "templateBias": {
+        "resultTrack": 0.45,
+        "processTrack": 0.35,
+        "distributionTrack": 0.20
+      }
+    }
+  ],
+  "globalRules": {
+    "disallowedAutomation": [
+      "auto_follow",
+      "auto_like",
+      "auto_retweet",
+      "auto_bulk_reply",
+      "auto_dm",
+      "auto_publish"
+    ],
+    "manualConfirmationRequired": [
+      "reply_draft_send",
+      "content_publish",
+      "follower_snapshot_edit",
+      "best_post_marking"
+    ],
+    "reviewCadence": {
+      "dailyReview": "once_per_day",
+      "weeklyReview": "once_per_week"
+    }
+  }
+}
