@@ -27,6 +27,7 @@ const ARTICLE_NON_PUBLISH_ENDPOINT_PATTERN =
   /\/graphql\/[^/]+\/ArticleEntity[^/]*(Delete|DraftCreate|UpdateTitle|UpdateContent|Autosave|Preview)/i;
 const SHORT_POST_NON_PUBLISH_ENDPOINT_PATTERN =
   /\/graphql\/[^/]+\/(FetchDraftTweets|DeleteTweet|UserTweets|UserTweetsAndReplies|UserMedia|UserHighlights|UserBy|UserResultBy|HomeTimeline|SearchTimeline|TweetDetail|TweetResultByRestId|FavoriteTweet|UnfavoriteTweet|CreateRetweet|DeleteRetweet|Retweeters|Bookmark|DeleteBookmark)/i;
+const SHORT_POST_USER_FLOW_PATTERN = /\/i\/api\/1\.1\/graphql\/user_flow\.json/i;
 const FOLLOWING_PATTERN = /\/graphql\/[^/]+\/Following/i;
 const FOLLOWERS_PATTERN = /\/graphql\/[^/]+\/(BlueVerified)?Followers/i;
 const RESERVED_HANDLES = new Set([
@@ -82,12 +83,19 @@ const ARTICLE_PUBLISH_SUCCESS_PATTERNS = [
   /article published/i,
   /文章已发布/i,
 ];
+const SHORT_POST_PUBLISH_SUCCESS_PATTERNS = [
+  /your post was sent/i,
+  /you have 1 hour to make any edits/i,
+  /your post was sent\.\s*you have 1 hour to make any edits\./i,
+  /帖子已发送/i,
+  /已发送/i,
+];
 const SHORT_POST_PUBLISH_BUTTON_SELECTORS = [
   '[data-testid="tweetButton"]',
   '[data-testid="tweetButtonInline"]',
 ];
 const SHORT_POST_PUBLISH_TEXT_PATTERNS = [/post/i, /发布/i, /发帖/i, /发送/i];
-const SHORT_POST_PENDING_WINDOW_MS = 10_000;
+const SHORT_POST_PENDING_WINDOW_MS = 30_000;
 const ARTICLE_SIGNAL_KEYS = [
   'article_body',
   'articlebody',
@@ -180,10 +188,14 @@ let shortPostPublishSession: {
   state: ShortPostRecognitionDebugState;
   pendingAt: number;
   composerText: string;
+  lastRequestAt: number;
+  lastRequestEndpoint: string;
 } = {
   state: 'idle',
   pendingAt: 0,
   composerText: '',
+  lastRequestAt: 0,
+  lastRequestEndpoint: '',
 };
 
 let articlePublishSession: {
@@ -275,6 +287,8 @@ function transitionShortPostState(
           ? 0
           : shortPostPublishSession.pendingAt,
     composerText: nextState === 'idle' ? '' : shortPostPublishSession.composerText,
+    lastRequestAt: nextState === 'idle' ? 0 : shortPostPublishSession.lastRequestAt,
+    lastRequestEndpoint: nextState === 'idle' ? '' : shortPostPublishSession.lastRequestEndpoint,
   };
   pushShortPostDebugEvent(type, nextState, detail, metadata);
 }
@@ -421,6 +435,24 @@ function findLongestTextCandidate(value: unknown): string {
   return bestCandidate;
 }
 
+function normalizeTextForMatch(value: string) {
+  return value.replace(/\s+/g, ' ').trim().toLowerCase();
+}
+
+function hasTextOverlap(left: string, right: string) {
+  if (!left || !right) {
+    return false;
+  }
+
+  const normalizedLeft = normalizeTextForMatch(left);
+  const normalizedRight = normalizeTextForMatch(right);
+  if (!normalizedLeft || !normalizedRight) {
+    return false;
+  }
+
+  return normalizedLeft.includes(normalizedRight) || normalizedRight.includes(normalizedLeft);
+}
+
 function getComposerTextareaCount() {
   return document.querySelectorAll('[data-testid^="tweetTextarea_"]').length;
 }
@@ -500,6 +532,15 @@ function openShortPostPublishSession(reason: string) {
 
   const text = getPrimaryComposerText();
   if (!text) {
+    if (hasPendingShortPostPublishSession()) {
+      pushShortPostDebugEvent(
+        'short-post-empty-click-ignored',
+        'candidate',
+        '已处于短推发布确认阶段，忽略发布后的空输入框点击。',
+      );
+      return;
+    }
+
     transitionShortPostState(
       'ignored',
       'short-post-publish-clicked-empty',
@@ -512,6 +553,8 @@ function openShortPostPublishSession(reason: string) {
     state: shortPostPublishSession.state,
     pendingAt: shortPostPublishSession.pendingAt,
     composerText: text,
+    lastRequestAt: 0,
+    lastRequestEndpoint: '',
   };
   transitionShortPostState('candidate', reason, '检测到普通短推发布动作，等待真正的发布请求返回。');
 }
@@ -680,6 +723,26 @@ function hasShortPostPublishResultSignals(payload: unknown) {
   });
 }
 
+function hasShortPostPublishRequestSignals(payload: unknown, composerText: string) {
+  const hasCreateRequestEnvelope = findTruthyByKeys(payload, (key) => {
+    const normalizedKey = key.replace(/[^a-zA-Z0-9_]/g, '').toLowerCase();
+    return (
+      normalizedKey.includes('tweetcreaterequest') ||
+      normalizedKey.includes('createtweetrequest') ||
+      normalizedKey.includes('posttweetrequest') ||
+      normalizedKey.includes('tweettext') ||
+      normalizedKey === 'status'
+    );
+  });
+
+  if (hasCreateRequestEnvelope) {
+    return true;
+  }
+
+  const requestText = findLongestTextCandidate(payload).trim();
+  return hasTextOverlap(requestText, composerText);
+}
+
 function extractGraphqlOperationName(endpoint: string) {
   const matched = endpoint.match(/\/graphql\/[^/]+\/([^/?#]+)/i);
   return matched?.[1] ?? '';
@@ -702,6 +765,14 @@ function endpointLooksLikeShortPostMutation(endpoint: string) {
   return /CreateTweet|CreateNoteTweet|PostTweet|TweetCreate|CreatePost|PostCreate/i.test(
     operationName,
   );
+}
+
+function rememberShortPostRequestSeen(endpoint: string) {
+  shortPostPublishSession = {
+    ...shortPostPublishSession,
+    lastRequestAt: Date.now(),
+    lastRequestEndpoint: endpoint,
+  };
 }
 
 function hasGraphqlErrors(payload: unknown) {
@@ -877,6 +948,10 @@ function looksLikeShortPostPublishSuccess(
     return false;
   }
 
+  if (SHORT_POST_NON_PUBLISH_ENDPOINT_PATTERN.test(endpoint)) {
+    return false;
+  }
+
   if (inferActionType(payload) !== 'original') {
     return false;
   }
@@ -884,9 +959,12 @@ function looksLikeShortPostPublishSuccess(
   const textContent = findLongestTextCandidate(payload).trim();
   const composerText = shortPostPublishSession.composerText.trim();
   const hasAnyTextSignal = textContent.length > 0 || composerText.length > 0;
-  const endpointLooksLikeMutation = endpointLooksLikeShortPostMutation(endpoint);
+  const requestLooksLikePublish = hasShortPostPublishRequestSignals(payload, composerText);
+  const endpointLooksLikeMutation =
+    endpointLooksLikeShortPostMutation(endpoint) ||
+    (SHORT_POST_USER_FLOW_PATTERN.test(endpoint) && requestLooksLikePublish);
   const responseLooksLikeSuccess = hasShortPostPublishResultSignals(responsePayload);
-  const shouldTrace = endpointLooksLikeMutation || responseLooksLikeSuccess;
+  const shouldTrace = endpointLooksLikeMutation;
 
   if (!shouldTrace) {
     return false;
@@ -914,6 +992,10 @@ function looksLikeShortPostPublishSuccess(
       responseKeys: collectNormalizedKeys(responsePayload),
     },
   );
+
+  if (endpointLooksLikeMutation || responseLooksLikeSuccess) {
+    rememberShortPostRequestSeen(endpoint);
+  }
 
   if (!hasAnyTextSignal && !endpointLooksLikeMutation && !responseLooksLikeSuccess) {
     pushShortPostDebugEvent(
@@ -944,9 +1026,7 @@ function looksLikeShortPostPublishSuccess(
   const endpointLooksLikeOriginalMutation = endpointLooksLikeMutation;
 
   const matched =
-    endpointLooksLikeOriginalMutation ||
-    responseLooksLikeSuccess ||
-    hasShortPostPublishResultSignals(payload);
+    endpointLooksLikeOriginalMutation || responseLooksLikeSuccess || requestLooksLikePublish;
 
   if (!matched) {
     pushShortPostDebugEvent(
@@ -987,6 +1067,21 @@ function isWithinDialog(target: EventTarget | null) {
 function pageIncludesArticlePublishSuccessSignal() {
   const bodyText = document.body?.innerText ?? '';
   return ARTICLE_PUBLISH_SUCCESS_PATTERNS.some((pattern) => pattern.test(bodyText));
+}
+
+function pageIncludesShortPostPublishSuccessSignal() {
+  const liveRegionText = [
+    ...document.querySelectorAll(
+      '[role="alert"], [role="status"], [aria-live="assertive"], [aria-live="polite"]',
+    ),
+  ]
+    .map((node) => node.textContent ?? '')
+    .join(' ')
+    .trim();
+  const bodyText = document.body?.innerText ?? '';
+  const combinedText = `${liveRegionText} ${bodyText}`.trim();
+
+  return SHORT_POST_PUBLISH_SUCCESS_PATTERNS.some((pattern) => pattern.test(combinedText));
 }
 
 function emitDirectArticlePublishMutation(
@@ -1038,6 +1133,8 @@ function emitDirectShortPostMutation(
     state: 'idle',
     pendingAt: 0,
     composerText: '',
+    lastRequestAt: 0,
+    lastRequestEndpoint: '',
   };
 }
 
@@ -1083,12 +1180,31 @@ function tryConfirmShortPostPublishByPageResult(reason: string) {
     return;
   }
 
+  const requestIsRecent =
+    shortPostPublishSession.lastRequestAt > 0 &&
+    Date.now() - shortPostPublishSession.lastRequestAt < SHORT_POST_PENDING_WINDOW_MS;
+  if (!requestIsRecent) {
+    return;
+  }
+
   const pathname = window.location.pathname;
   if (!SHORT_POST_RESULT_PATH_PATTERN.test(pathname)) {
     return;
   }
 
   emitDirectShortPostMutation(reason, `page-result:${pathname}`, 'fetch');
+}
+
+function tryConfirmShortPostPublishBySuccessToast(reason: string) {
+  if (!hasPendingShortPostPublishSession()) {
+    return;
+  }
+
+  if (!pageIncludesShortPostPublishSuccessSignal()) {
+    return;
+  }
+
+  emitDirectShortPostMutation(reason, 'page-toast:short-post-sent', 'fetch');
 }
 
 function resetArticlePublishSession(reason: string, detail: string) {
@@ -1306,6 +1422,8 @@ function emitMutationEvent(
       state: 'idle',
       pendingAt: 0,
       composerText: '',
+      lastRequestAt: 0,
+      lastRequestEndpoint: '',
     };
   }
 }
@@ -1413,6 +1531,7 @@ const articleContextObserver = new MutationObserver(() => {
   syncArticleWorkflowState('dom-observer');
   tryConfirmArticlePublishBySuccessToast('page-toast-confirmed');
   tryConfirmArticlePublishByPageResult('page-result-confirmed');
+  tryConfirmShortPostPublishBySuccessToast('short-post-toast-confirmed');
   tryConfirmShortPostPublishByPageResult('short-post-page-result-confirmed');
 });
 
@@ -1427,6 +1546,7 @@ window.addEventListener('popstate', () => {
   syncArticleWorkflowState('popstate');
   tryConfirmArticlePublishBySuccessToast('popstate-toast-confirmed');
   tryConfirmArticlePublishByPageResult('popstate-result-confirmed');
+  tryConfirmShortPostPublishBySuccessToast('short-post-popstate-toast-confirmed');
   tryConfirmShortPostPublishByPageResult('short-post-popstate-result-confirmed');
 });
 
@@ -1434,6 +1554,7 @@ window.addEventListener('hashchange', () => {
   syncArticleWorkflowState('hashchange');
   tryConfirmArticlePublishBySuccessToast('hashchange-toast-confirmed');
   tryConfirmArticlePublishByPageResult('hashchange-result-confirmed');
+  tryConfirmShortPostPublishBySuccessToast('short-post-hashchange-toast-confirmed');
   tryConfirmShortPostPublishByPageResult('short-post-hashchange-result-confirmed');
 });
 
