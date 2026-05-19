@@ -49,7 +49,7 @@ const POPUP_RELEVANT_STORAGE_KEYS = new Set([
 
 function formatFollowerDelta(delta: number | null) {
   if (typeof delta !== 'number') {
-    return '还没有昨日对比';
+    return '暂无昨日对比';
   }
 
   if (delta > 0) {
@@ -272,7 +272,7 @@ export function PopupApp() {
               已完成 {summary?.completedTaskCount ?? 0} / {summary?.totalTaskCount ?? 0} 项
             </span>
             <span class="text-right">连续 {summary?.streakDays ?? 0} 天</span>
-            <span>近 7 天稳定度 {consistencyPercent}%</span>
+            <span>近 7 天稳定 {consistencyPercent}%</span>
             <span class="text-right">{settings?.intensityPreset ?? 'standard'} 档</span>
           </div>
         </section>
@@ -328,7 +328,7 @@ export function PopupApp() {
           >
             <div class="mb-2 flex items-center justify-between text-[11px] text-[#797776]">
               <span>趋势</span>
-              <span>{followerTrendPoints.length > 1 ? '趋势已记录' : '等待更多样本'}</span>
+              <span>{followerTrendPoints.length > 1 ? '最近趋势' : '样本不足'}</span>
             </div>
             <div class={followerTrendPoints.length > 1 ? 'h-[52px]' : 'h-[26px]'}>
               <FollowerSparkline
@@ -344,7 +344,6 @@ export function PopupApp() {
             <span class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
               建议互动
             </span>
-            <span class="text-xs text-slate-600">{recommendedAccounts.length} 个</span>
           </div>
           <div class="grid gap-2">
             {visibleRecommendedAccounts.length > 0 ? (
@@ -375,7 +374,7 @@ export function PopupApp() {
                 </a>
               ))
             ) : (
-              <span class="text-sm text-slate-500">还没有推荐账号。</span>
+              <span class="text-sm text-slate-500">暂无推荐账号</span>
             )}
           </div>
         </section>
@@ -390,7 +389,7 @@ export function PopupApp() {
               搜索入口
             </span>
             <span class="text-xs text-slate-600">
-              {pinnedSearchTemplates.length} 个 {searchEntryExpanded ? '收起' : '展开'}
+              {searchEntryExpanded ? '收起' : '展开'}
             </span>
           </button>
           {searchEntryExpanded ? (
@@ -408,7 +407,7 @@ export function PopupApp() {
                       <p class="m-0 min-w-0 truncate font-semibold text-slate-900">
                         {template.name}
                       </p>
-                      <span class="shrink-0 text-[11px] text-slate-500">打开</span>
+                      <span class="shrink-0 text-[11px] text-slate-500">前往</span>
                     </div>
                     <p class="m-0 mt-1 line-clamp-1 text-[11px] leading-5 text-slate-500">
                       {template.description}
@@ -416,7 +415,7 @@ export function PopupApp() {
                   </a>
                 ))
               ) : (
-                <span class="text-sm text-slate-500">还没有固定模板。</span>
+                <span class="text-sm text-slate-500">暂无固定模板</span>
               )}
             </div>
           ) : null}
@@ -430,7 +429,7 @@ export function PopupApp() {
           </div>
           <div class="rounded-[18px] border border-slate-200 bg-white/80 px-3 py-3">
             <p class="m-0 whitespace-pre-wrap text-sm leading-6 text-slate-800">
-              {reviewDraft?.xDraft ?? '今天的复盘推文草稿还没有生成。'}
+              {reviewDraft?.xDraft ?? '今天还没有复盘草稿'}
             </p>
           </div>
           <div class="mt-3 grid grid-cols-[1fr_auto] gap-2">
@@ -474,7 +473,7 @@ export function PopupApp() {
                 type="button"
                 onClick={() => void handleSaveReviewUrls()}
               >
-                保存附录
+                保存
               </button>
             </div>
           </details>

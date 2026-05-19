@@ -155,7 +155,7 @@ try {
   await optionsPage.fill('#account-handle', 'tester');
   await optionsPage.getByRole('button', { name: '保存并重建今天任务' }).click();
   await optionsPage.waitForFunction(
-    () => document.body.textContent?.includes('X 增长插件工作台') ?? false,
+    () => document.body.textContent?.includes('X 增长任务台') ?? false,
     null,
     { timeout: 15000 },
   );
@@ -164,7 +164,7 @@ try {
       const text = document.body.textContent ?? '';
       const heatmapCells = document.querySelectorAll('[title*="完成率"]').length;
       return (
-        text.includes('近一年执行热力图') &&
+        text.includes('近一年热力图') &&
         text.includes(expectedRangeLabel) &&
         heatmapCells >= 300
       );

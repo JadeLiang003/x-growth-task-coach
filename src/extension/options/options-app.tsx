@@ -102,9 +102,9 @@ const PAGE_SIZE = 10;
 const INTENSITY_AUTOSAVE_DELAY_MS = 700;
 
 const intensityOptions: Array<{ label: string; value: IntensityPreset; description: string }> = [
-  { label: '保守', value: 'conservative', description: '适合恢复节奏，目标更轻。' },
-  { label: '标准', value: 'standard', description: '默认节奏，适合持续执行。' },
-  { label: '强执行', value: 'aggressive', description: '适合短期冲刺，目标更高。' },
+  { label: '保守', value: 'conservative', description: '适合恢复节奏，目标更轻' },
+  { label: '标准', value: 'standard', description: '默认节奏，适合持续执行' },
+  { label: '强执行', value: 'aggressive', description: '适合短期冲刺，目标更高' },
 ];
 
 const intensityModeOptions: Array<{
@@ -116,23 +116,23 @@ const intensityModeOptions: Array<{
   {
     label: '自定义',
     value: 'custom',
-    description: '在下方直接改每天数量，保存后立即重建今天的目标上限。',
+    description: '直接改每天数量并重建今天目标',
   },
 ];
 
 const taskSubtitleMap: Record<string, string> = {
-  shortContentPosts: '发一条普通短推就计一次，不含 Article。',
-  shortPosts: '发一条普通短推就计一次，不含 Article。',
-  threadPosts: '一次连续串帖算一条线程，至少包含两条连续内容。',
-  longFormPosts: '只有发布 X Article 才计入长文。',
-  highQualityReplies: '任何有效回复都会计入，不能只是客套话或灌水。',
-  bigCreatorInteractions: '只统计已入池、标签为对标学习且粉丝量级在 5k-10k 及以上的互动。',
-  peerInteractions: '只统计已入池、标签为同生态的互动，不额外限制粉丝量级。',
-  quotePosts: '引用转发一次就计一次，需要附带你自己的判断。',
-  contentIdeasCaptured: '记下一条之后可以展开写内容的具体问题、案例或角度。',
-  dailyReview: '补齐当天链接或总结，并完成一次简短回看。',
-  benchmarkDistillation: '拆一条对标内容，记下结构、角度或可复用动作。',
-  contentSuggestionConsumed: '按建议发出或落地一条内容，就算完成一次。',
+  shortContentPosts: '普通短推计一次，不含 Article',
+  shortPosts: '普通短推计一次，不含 Article',
+  threadPosts: '连续串帖算一条线程',
+  longFormPosts: '发布 X Article 才计入长文',
+  highQualityReplies: '有效回复才计入',
+  bigCreatorInteractions: '只统计高量级对标互动',
+  peerInteractions: '只统计同生态互动',
+  quotePosts: '引用转发计一次',
+  contentIdeasCaptured: '记下一条可展开写的题材',
+  dailyReview: '补齐链接或总结，并完成回看',
+  benchmarkDistillation: '拆一条对标内容并记下要点',
+  contentSuggestionConsumed: '按建议落地一条内容',
 };
 
 const accountPriorityOptions: Array<{ value: AccountPoolPriority; label: string }> = [
@@ -146,12 +146,12 @@ const searchTemplateCategoryOptions: Array<{
   label: string;
   description: string;
 }> = [
-  { value: 'questions', label: '找问题', description: '找提问帖和求助帖，优先切回复。' },
-  { value: 'viral', label: '拆爆款', description: '找已有互动的内容，拆结构和角度。' },
-  { value: 'creator', label: '追创作者', description: '跟踪目标创作者最近在聊什么。' },
-  { value: 'niche', label: '找新账号', description: '发现量级接近但内容不错的账号。' },
-  { value: 'recent', label: '看实时', description: '优先参与刚发出来不久的内容。' },
-  { value: 'custom', label: '自定义', description: '完全按你自己的搜索语法保存。' },
+  { value: 'questions', label: '找问题', description: '找提问帖和求助帖，优先切回复' },
+  { value: 'viral', label: '拆爆款', description: '找已有互动的内容，拆结构和角度' },
+  { value: 'creator', label: '追创作者', description: '跟踪目标创作者最近在聊什么' },
+  { value: 'niche', label: '找新账号', description: '发现量级接近但内容不错的账号' },
+  { value: 'recent', label: '看实时', description: '优先参与刚发出来不久的内容' },
+  { value: 'custom', label: '自定义', description: '完全按你自己的搜索语法保存' },
 ];
 
 type SettingsTab = 'setup' | 'workspace' | 'templates';
@@ -230,7 +230,7 @@ function splitMultilineText(value: string) {
 
 function formatLastInteractedAt(timestamp: string | null) {
   if (!timestamp) {
-    return '还没有互动记录';
+    return '暂无互动记录';
   }
 
   return new Date(timestamp).toLocaleString('zh-CN', {
@@ -279,7 +279,7 @@ function formatCompactFollowerCount(value: number | null | undefined) {
 
 function formatFollowerDelta(delta: number | null) {
   if (typeof delta !== 'number') {
-    return '还没有昨日对比';
+    return '暂无昨日对比';
   }
 
   if (delta > 0) {
@@ -525,7 +525,7 @@ function buildCustomOverlay(
 
 export function OptionsApp() {
   const [settings, setSettings] = useState<ExtensionSettings>(defaultSettings);
-  const [saveStatus, setSaveStatus] = useState('还没有保存');
+  const [saveStatus, setSaveStatus] = useState('尚未保存');
   const [exportBusyKey, setExportBusyKey] = useState<string | null>(null);
   const [recentExportKey, setRecentExportKey] = useState<string | null>(null);
   const [importBusyKey, setImportBusyKey] = useState<string | null>(null);
@@ -548,10 +548,10 @@ export function OptionsApp() {
   const [customOverlayForm, setCustomOverlayForm] =
     useState<CustomOverlayFormState>(defaultCustomOverlayForm);
   const [, setCandidateStatus] = useState(
-    '打开 Following / Followers 并滚动后，候选账号会自动更新。',
+    '打开 Following / Followers 后自动更新',
   );
-  const [, setAccountStatus] = useState('正式账号池已准备好。');
-  const [, setTemplateStatus] = useState('中文搜索模板已准备好。');
+  const [, setAccountStatus] = useState('正式账号池已准备好');
+  const [, setTemplateStatus] = useState('搜索模板已准备好');
   const [selectedCandidateIds, setSelectedCandidateIds] = useState<string[]>([]);
   const [selectedAccountIds, setSelectedAccountIds] = useState<string[]>([]);
   const [candidateStatusFilter, setCandidateStatusFilter] =
@@ -666,7 +666,7 @@ export function OptionsApp() {
       await syncSystemSearchTemplatesForSettings(loadedSettings);
       setSearchTemplates(await listSearchTemplates());
       setSaveStatus('已读取本地设置');
-      setTemplateStatus('中文搜索模板已同步');
+      setTemplateStatus('搜索模板已同步');
     })();
 
     const unsubscribe = subscribeToStorageChanges((_changes, areaName) => {
@@ -1005,7 +1005,7 @@ export function OptionsApp() {
 
   const handleSelectIntensityMode = (mode: IntensityMode) => {
     if (mode === 'custom') {
-      setSaveStatus('已经切到自定义，直接改下面的每日数量即可。');
+      setSaveStatus('已切到自定义，可直接改每日数量');
       return;
     }
 
@@ -1015,7 +1015,7 @@ export function OptionsApp() {
       taskTargetOverrides: {},
     }));
     setSaveStatus(
-      `已套用「${intensityOptions.find((option) => option.value === mode)?.label}」预设。`,
+      `已套用「${intensityOptions.find((option) => option.value === mode)?.label}」预设`,
     );
   };
 
@@ -1033,7 +1033,7 @@ export function OptionsApp() {
       return;
     }
 
-    setSaveStatus('正在自动保存今日目标...');
+    setSaveStatus('正在自动保存今日目标');
 
     if (intensityAutosaveTimerRef.current !== null) {
       window.clearTimeout(intensityAutosaveTimerRef.current);
@@ -1047,7 +1047,7 @@ export function OptionsApp() {
           settings,
         });
         lastSavedIntensitySignatureRef.current = intensitySettingsSignature;
-        setSaveStatus('今日目标已自动保存，已完成进度会保留。');
+        setSaveStatus('今日目标已自动保存，已完成进度会保留');
       })();
     }, INTENSITY_AUTOSAVE_DELAY_MS);
 
@@ -1061,24 +1061,24 @@ export function OptionsApp() {
   const handleRefreshSystemTemplates = async () => {
     await syncSystemSearchTemplatesForSettings(settings);
     setSearchTemplateForm(defaultSearchTemplateForm);
-    setTemplateStatus('已按当前人设重新生成系统模板。');
+    setTemplateStatus('已按当前人设更新模板');
   };
 
   const handleResetSystemTemplates = async () => {
     await syncSystemSearchTemplatesForSettings(settings);
     setSearchTemplateForm(defaultSearchTemplateForm);
-    setTemplateStatus('系统模板已恢复到当前版本的默认中文模板。');
+    setTemplateStatus('已恢复默认模板');
   };
 
   const handleSaveSettings = async () => {
-    setSaveStatus('正在保存，并按新目标重建今天任务...');
+    setSaveStatus('正在保存并重建今天任务');
     await saveSettings(settings);
     await syncSystemSearchTemplatesForSettings(settings);
     await rebuildTodayRecordFromSettings({
       preserveProgress: true,
       settings,
     });
-    setSaveStatus('已保存。今天的任务目标已更新，已完成进度会保留。');
+    setSaveStatus('已保存，今天的任务目标已更新，已完成进度会保留');
     setTemplateStatus('已按当前人设刷新系统搜索模板');
   };
 
@@ -1091,17 +1091,17 @@ export function OptionsApp() {
     });
     setSettings(defaultSettings);
     setCustomOverlayForm(defaultCustomOverlayForm);
-    setSaveStatus('已恢复默认设置，并重建今天任务目标。');
+    setSaveStatus('已恢复默认设置，并重建今天任务目标');
   };
 
   const handleClearArticleDebugLogs = async () => {
     await saveArticleRecognitionDebugLogs([]);
-    setSaveStatus('已清空长文识别调试记录。');
+    setSaveStatus('已清空长文事件');
   };
 
   const handleClearShortPostDebugLogs = async () => {
     await saveShortPostRecognitionDebugLogs([]);
-    setSaveStatus('已清空短推识别调试记录。');
+    setSaveStatus('已清空短推事件');
   };
 
   const exportDebugLogs = (
@@ -1123,7 +1123,7 @@ export function OptionsApp() {
       generatedAt: new Date().toISOString(),
       articleRecognitionDebugLogs: articleDebugLogs,
     });
-    setSaveStatus('已导出长文识别调试日志。');
+    setSaveStatus('已导出长文日志');
   };
 
   const handleExportShortPostDebugLogs = () => {
@@ -1131,7 +1131,7 @@ export function OptionsApp() {
       generatedAt: new Date().toISOString(),
       shortPostRecognitionDebugLogs: shortPostDebugLogs,
     });
-    setSaveStatus('已导出短推识别调试日志。');
+    setSaveStatus('已导出短推日志');
   };
 
   const handleExportFullBackup = async () => {
@@ -1313,7 +1313,7 @@ export function OptionsApp() {
       ]);
 
       await loadPageData();
-      setSaveStatus('完整备份已导入，本地数据已经刷新。');
+      setSaveStatus('完整备份已导入，本地数据已刷新');
     });
   };
 
@@ -1357,7 +1357,7 @@ export function OptionsApp() {
 
   const handleSubmitCustomOverlay = async () => {
     if (!customOverlayForm.name.trim()) {
-      setSaveStatus('请先给自定义人设起一个名字');
+      setSaveStatus('请先给自定义人设命名');
       return;
     }
 
@@ -1379,8 +1379,8 @@ export function OptionsApp() {
     setCustomOverlayForm(defaultCustomOverlayForm);
     setSaveStatus(
       customOverlayForm.id
-        ? '自定义人设已更新，记得保存设置。'
-        : '自定义人设已加入，记得保存设置。',
+        ? '自定义人设已更新，记得保存设置'
+        : '自定义人设已加入，记得保存设置',
     );
   };
 
@@ -1405,7 +1405,7 @@ export function OptionsApp() {
     if (customOverlayForm.id === overlayId) {
       setCustomOverlayForm(defaultCustomOverlayForm);
     }
-    setSaveStatus('自定义人设已移除，记得保存设置。');
+    setSaveStatus('自定义人设已移除，记得保存设置');
   };
 
   const handleSubmitAccount = async () => {
@@ -1670,16 +1670,16 @@ export function OptionsApp() {
       <div class="mx-auto max-w-6xl">
         <header class="mb-6">
           <p class="mb-2 text-[11px] font-bold uppercase tracking-[0.26em] text-slate-500">
-            X Growth Task Coach / Phase 7.6
+            X Growth Task Coach
           </p>
           <h1
             class="m-0 text-4xl leading-none text-slate-900"
             style={{ fontFamily: '"Palatino Linotype", Palatino, Georgia, serif' }}
           >
-            X 增长插件工作台
+            X 增长任务台
           </h1>
-          <p class="mt-3 max-w-3xl text-sm leading-6 text-slate-600">
-            这一轮只做统一、减重和收口，不再继续往里塞新东西。
+          <p class="mt-3 text-sm font-medium text-slate-500">
+            JadeAI乐章 @JadeAINotes
           </p>
         </header>
 
@@ -1761,7 +1761,7 @@ export function OptionsApp() {
                 <label class="coach-toggle">
                   <div>
                     <div class="text-sm font-semibold text-slate-900">自动读取粉丝数</div>
-                    <div class="text-xs text-slate-500">只在你打开自己主页时更新。</div>
+                    <div class="text-xs text-slate-500">打开主页时自动更新</div>
                   </div>
                   <input
                     checked={settings.followerAutoReadEnabled}
@@ -1774,7 +1774,7 @@ export function OptionsApp() {
                 <label class="coach-toggle">
                   <div>
                     <div class="text-sm font-semibold text-slate-900">页面悬浮轻面板</div>
-                    <div class="text-xs text-slate-500">在 X 页面显示精简进度和快速打卡。</div>
+                    <div class="text-xs text-slate-500">在页面显示进度和快捷打卡</div>
                   </div>
                   <input
                     checked={settings.contentObserverEnabled}
@@ -1788,7 +1788,7 @@ export function OptionsApp() {
                   <div>
                     <div class="text-sm font-semibold text-slate-900">长文识别调试</div>
                     <div class="text-xs text-slate-500">
-                      只在排查 Article 发布问题时开启，便于保留最近事件。
+                      只在排查 Article 时开启
                     </div>
                   </div>
                   <input
@@ -1805,7 +1805,7 @@ export function OptionsApp() {
                 <summary class="flex cursor-pointer list-none items-center justify-between gap-3 text-sm font-semibold text-slate-900">
                   <span>数据备份与恢复</span>
                   <span class="rounded-full border border-[rgba(36,36,36,0.06)] bg-white/60 px-2.5 py-1 text-[10px] font-medium text-slate-400">
-                    JSON 备份 · CSV 导出
+                    备份与导出
                   </span>
                 </summary>
 
@@ -1875,11 +1875,11 @@ export function OptionsApp() {
               {settings.debugModeEnabled ? (
                 <details class="coach-task-card mt-4 rounded-[24px] p-4">
                   <summary class="cursor-pointer text-sm font-semibold text-slate-900">
-                    最近长文识别事件（{articleDebugLogs.length}）
+                    最近长文事件（{articleDebugLogs.length}）
                   </summary>
                   <div class="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <p class="m-0 min-w-0 text-xs leading-5 text-slate-500">
-                      这里只保留最近的识别过程，方便你手动发文后快速核对有没有点到两次发布、有没有等到成功信号。
+                      只保留最近事件，便于核对发布过程
                     </p>
                     <div class="flex items-center gap-2">
                       <button
@@ -1901,7 +1901,7 @@ export function OptionsApp() {
                   <div class="mt-3 grid gap-2">
                     {articleDebugLogs.length === 0 ? (
                       <div class="rounded-2xl border border-dashed border-slate-200 bg-slate-50 px-4 py-3 text-xs text-slate-500">
-                        还没有记录。打开调试后，自己手动发一篇 Article，再回来查看。
+                        暂无记录，开启调试后发一篇 Article 再查看
                       </div>
                     ) : (
                       articleDebugLogs
@@ -1960,11 +1960,11 @@ export function OptionsApp() {
               {settings.debugModeEnabled ? (
                 <details class="coach-task-card mt-4 rounded-[24px] p-4">
                   <summary class="cursor-pointer text-sm font-semibold text-slate-900">
-                    最近短推识别事件（{shortPostDebugLogs.length}）
+                    最近短推事件（{shortPostDebugLogs.length}）
                   </summary>
                   <div class="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <p class="m-0 min-w-0 text-xs leading-5 text-slate-500">
-                      这里只保留最近的普通短推识别过程，方便你手动发短推后核对有没有命中、有没有被忽略或去重。
+                      只保留最近事件，便于核对短推识别
                     </p>
                     <div class="flex items-center gap-2">
                       <button
@@ -1986,7 +1986,7 @@ export function OptionsApp() {
                   <div class="mt-3 grid gap-2">
                     {shortPostDebugLogs.length === 0 ? (
                       <div class="rounded-2xl border border-dashed border-slate-200 bg-slate-50 px-4 py-3 text-xs text-slate-500">
-                        还没有记录。打开调试后，自己手动发一条普通短推，再回来查看。
+                        暂无记录，开启调试后发一条短推再查看
                       </div>
                     ) : (
                       shortPostDebugLogs
@@ -2047,7 +2047,7 @@ export function OptionsApp() {
               <section class="coach-panel rounded-[28px] p-6">
                 <div class="mb-4 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
                   <div>
-                    <h2 class="m-0 text-2xl text-slate-900">近一年执行热力图</h2>
+                    <h2 class="m-0 text-2xl text-slate-900">近一年热力图</h2>
                   </div>
                   <span class="rounded-full border border-[rgba(36,36,36,0.12)] bg-white/75 px-3 py-1 text-[11px] font-medium text-[#4e4d4d]">
                     {formatHeatmapRangeLabel('year')} ·{' '}
@@ -2088,7 +2088,7 @@ export function OptionsApp() {
 
               <section class="coach-panel rounded-[28px] p-6">
                 <div class="mb-4">
-                  <h2 class="m-0 text-2xl text-slate-900">粉丝趋势</h2>
+                  <h2 class="m-0 text-2xl text-slate-900">粉丝变化</h2>
                 </div>
 
                 <div class="rounded-[24px] border border-[rgba(36,36,36,0.08)] bg-white/82 p-5">
@@ -2115,7 +2115,7 @@ export function OptionsApp() {
 
                   <div class="rounded-[20px] border border-[rgba(36,36,36,0.08)] bg-[rgba(207,218,245,0.14)] px-4 py-4">
                     <div class="mb-3 flex items-center justify-between text-[11px] text-[#797776]">
-                      <span>{followerTrend.length > 1 ? '趋势已记录' : '等待更多样本'}</span>
+                      <span>{followerTrend.length > 1 ? '最近趋势' : '样本不足'}</span>
                       <span>
                         {typeof followerSummary?.todayCount === 'number'
                           ? `${followerSummary.todayCount.toLocaleString('en-US')} 粉`
@@ -2181,7 +2181,7 @@ export function OptionsApp() {
                         <div class="min-w-0">
                           <div class="text-sm font-medium text-slate-900">{task.label}</div>
                           <div class="mt-1 text-xs leading-5 text-slate-500">
-                            {taskSubtitleMap[task.taskId] ?? '完成一次真实动作后计入今日目标。'}
+                            {taskSubtitleMap[task.taskId] ?? '完成一次真实动作后计入今日目标'}
                           </div>
                         </div>
                         <input
@@ -2209,7 +2209,7 @@ export function OptionsApp() {
                 <div class="mb-4">
                   <h2 class="m-0 text-2xl text-slate-900">人设叠加</h2>
                   <p class="mt-2 text-sm leading-6 text-slate-600">
-                    它会影响搜索模板、内容建议、复盘建议，以及候选账号的关键词判断。
+                    会影响模板、建议和候选关键词判断
                   </p>
                   <div class="mt-3 flex flex-wrap gap-2">
                     {activeOverlayDefinitions.map((overlay) => (
@@ -2221,7 +2221,7 @@ export function OptionsApp() {
                       </span>
                     ))}
                     {activeOverlayDefinitions.length === 0 ? (
-                      <span class="text-xs text-slate-500">还没有选中任何人设。</span>
+                        <span class="text-xs text-slate-500">还未选择人设</span>
                     ) : null}
                   </div>
                 </div>
@@ -2381,7 +2381,7 @@ export function OptionsApp() {
                 <div>
                   <h2 class="m-0 text-2xl text-slate-900">账号工作台</h2>
                   <p class="mt-2 text-sm leading-6 text-slate-600">
-                    用一个页面统一处理待处理、已入池和已忽略账号。标签直接贴着名字改，不再来回跳后台。
+                    统一处理待处理、已入池和已忽略账号
                   </p>
                 </div>
               </div>
@@ -2536,7 +2536,7 @@ export function OptionsApp() {
                         {accountForm.id ? '编辑正式账号' : '手动添加正式账号'}
                       </p>
                       <p class="m-0 mt-1 text-xs leading-5 text-slate-500">
-                        补充一个你已经确认要长期跟进的账号，后面互动计数就能直接命中。
+                        补充一个长期跟进的账号，后续互动会直接命中
                       </p>
                     </div>
                   </div>
@@ -2874,7 +2874,7 @@ export function OptionsApp() {
                               </div>
                               <p class="m-0 mt-1 text-sm text-slate-600">@{candidate.handle}</p>
                               <p class="m-0 mt-2 line-clamp-2 text-sm leading-6 text-slate-700">
-                                {candidate.bio || '还没有抓到 bio'}
+                                {candidate.bio || '暂无 bio'}
                               </p>
                             </div>
                           </div>
@@ -3059,7 +3059,7 @@ export function OptionsApp() {
                                   accountMeta?.bio ||
                                   candidateBioMap[account.handle] ||
                                   account.notes ||
-                                  '还没有 bio'}
+                                  '暂无 bio'}
                               </p>
                             </div>
                           </div>
@@ -3156,9 +3156,9 @@ export function OptionsApp() {
             <section class="coach-panel rounded-[28px] p-6">
               <div class="mb-4 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
                 <div>
-                  <h2 class="m-0 text-2xl text-slate-900">中文搜索模板</h2>
+                  <h2 class="m-0 text-2xl text-slate-900">搜索模板</h2>
                   <p class="mt-2 text-sm leading-6 text-slate-600">
-                    这里是你每天找问题帖、找对标和找互动入口的动作面板。
+                    每天用来找问题、找对标、找互动
                   </p>
                 </div>
                 <div class="flex flex-wrap gap-2">
@@ -3167,14 +3167,14 @@ export function OptionsApp() {
                     type="button"
                     onClick={() => void handleRefreshSystemTemplates()}
                   >
-                    按当前人设重建
+                    按当前人设更新
                   </button>
                   <button
                     class="coach-button secondary"
                     type="button"
                     onClick={() => void handleResetSystemTemplates()}
                   >
-                    恢复系统模板
+                    恢复默认模板
                   </button>
                 </div>
               </div>
@@ -3214,7 +3214,7 @@ export function OptionsApp() {
                 <label class="coach-label">描述</label>
                 <input
                   class="coach-select"
-                  placeholder="一句话说明这个模板用来干什么"
+                  placeholder="一句话说明用途"
                   value={searchTemplateForm.description}
                   onInput={(event) =>
                     updateSearchTemplateForm('description', event.currentTarget.value)
@@ -3226,7 +3226,7 @@ export function OptionsApp() {
                 <label class="coach-label">查询语句</label>
                 <textarea
                   class="coach-select min-h-[120px]"
-                  placeholder="输入 X 搜索语句"
+                  placeholder="输入搜索语句"
                   value={searchTemplateForm.query}
                   onInput={(event) => updateSearchTemplateForm('query', event.currentTarget.value)}
                 />
@@ -3240,7 +3240,7 @@ export function OptionsApp() {
                     updateSearchTemplateForm('pinned', event.currentTarget.checked)
                   }
                 />
-                固定到 popup 快捷入口
+                固定到 popup
               </label>
 
               <div class="mb-6 flex flex-wrap gap-2">
@@ -3276,7 +3276,7 @@ export function OptionsApp() {
                         rel="noreferrer"
                         target="_blank"
                       >
-                        打开
+                        前往
                       </a>
                     </div>
                     <p class="mt-2 line-clamp-2 text-[11px] leading-5 text-slate-400">
