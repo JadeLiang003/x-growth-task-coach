@@ -90,6 +90,22 @@ const SHORT_POST_PUBLISH_SUCCESS_PATTERNS = [
   /帖子已发送/i,
   /已发送/i,
 ];
+const SHORT_POST_REPLY_TEXT_PATTERNS = [/reply/i, /回复/i, /回覆/i, /返信/i, /답글/i];
+const SHORT_POST_REPLY_CONTEXT_PATTERNS = [
+  /replying to/i,
+  /reply to/i,
+  /正在回复/i,
+  /回复给/i,
+  /回覆給/i,
+  /返信先/i,
+];
+const SHORT_POST_QUOTE_TEXT_PATTERNS = [/quote/i, /引用/i, /引用转发/i];
+const SHORT_POST_QUOTE_CONTEXT_PATTERNS = [
+  /quote this post/i,
+  /quoted post/i,
+  /引用这条/i,
+  /引用此帖/i,
+];
 const SHORT_POST_PUBLISH_BUTTON_SELECTORS = [
   '[data-testid="tweetButton"]',
   '[data-testid="tweetButtonInline"]',
@@ -190,12 +206,14 @@ let shortPostPublishSession: {
   composerText: string;
   lastRequestAt: number;
   lastRequestEndpoint: string;
+  actionType: ComposerActionType | null;
 } = {
   state: 'idle',
   pendingAt: 0,
   composerText: '',
   lastRequestAt: 0,
   lastRequestEndpoint: '',
+  actionType: null,
 };
 
 let articlePublishSession: {
@@ -289,6 +307,7 @@ function transitionShortPostState(
     composerText: nextState === 'idle' ? '' : shortPostPublishSession.composerText,
     lastRequestAt: nextState === 'idle' ? 0 : shortPostPublishSession.lastRequestAt,
     lastRequestEndpoint: nextState === 'idle' ? '' : shortPostPublishSession.lastRequestEndpoint,
+    actionType: nextState === 'idle' ? null : shortPostPublishSession.actionType,
   };
   pushShortPostDebugEvent(type, nextState, detail, metadata);
 }
@@ -504,6 +523,56 @@ function getClosestInteractiveElement(target: EventTarget | null) {
   return target.closest('button,[role="button"],a,div,span');
 }
 
+function getInteractiveCombinedText(target: EventTarget | null) {
+  const interactive = getClosestInteractiveElement(target);
+  if (!(interactive instanceof Element)) {
+    return '';
+  }
+
+  return [
+    interactive.textContent ?? '',
+    interactive.getAttribute('aria-label') ?? '',
+    interactive.getAttribute('data-testid') ?? '',
+  ]
+    .join(' ')
+    .trim();
+}
+
+function inferShortPostIntentActionType(target: EventTarget | null): ComposerActionType {
+  const interactiveText = getInteractiveCombinedText(target);
+  if (interactiveText) {
+    if (SHORT_POST_REPLY_TEXT_PATTERNS.some((pattern) => pattern.test(interactiveText))) {
+      return 'reply';
+    }
+
+    if (SHORT_POST_QUOTE_TEXT_PATTERNS.some((pattern) => pattern.test(interactiveText))) {
+      return 'quote';
+    }
+  }
+
+  if (!(target instanceof Element)) {
+    return 'original';
+  }
+
+  const contextText =
+    target
+      .closest('[role="dialog"],form,article,section,main')
+      ?.textContent?.slice(0, 1200)
+      .trim() ?? '';
+
+  if (contextText) {
+    if (SHORT_POST_REPLY_CONTEXT_PATTERNS.some((pattern) => pattern.test(contextText))) {
+      return 'reply';
+    }
+
+    if (SHORT_POST_QUOTE_CONTEXT_PATTERNS.some((pattern) => pattern.test(contextText))) {
+      return 'quote';
+    }
+  }
+
+  return 'original';
+}
+
 function isShortPostComposerContext() {
   return !isArticleEditorContext() && hasShortPostComposerSignals();
 }
@@ -525,8 +594,27 @@ function hasPendingShortPostPublishSession() {
   return true;
 }
 
-function openShortPostPublishSession(reason: string) {
+function openShortPostPublishSession(reason: string, target: EventTarget | null) {
   if (!isShortPostComposerContext()) {
+    return;
+  }
+
+  const actionType = inferShortPostIntentActionType(target);
+  if (actionType === 'reply') {
+    pushShortPostDebugEvent(
+      'short-post-reply-click-ignored',
+      'ignored',
+      '检测到回复发布动作，不按普通短推处理。',
+    );
+    return;
+  }
+
+  if (actionType === 'quote') {
+    pushShortPostDebugEvent(
+      'short-post-quote-click-ignored',
+      'ignored',
+      '检测到引用转发动作，不按普通短推处理。',
+    );
     return;
   }
 
@@ -555,24 +643,13 @@ function openShortPostPublishSession(reason: string) {
     composerText: text,
     lastRequestAt: 0,
     lastRequestEndpoint: '',
+    actionType: 'original',
   };
   transitionShortPostState('candidate', reason, '检测到普通短推发布动作，等待真正的发布请求返回。');
 }
 
 function isElementMatchingTextPatterns(target: EventTarget | null, patterns: RegExp[]) {
-  const interactive = getClosestInteractiveElement(target);
-  if (!(interactive instanceof Element)) {
-    return false;
-  }
-
-  const combinedText = [
-    interactive.textContent ?? '',
-    interactive.getAttribute('aria-label') ?? '',
-    interactive.getAttribute('data-testid') ?? '',
-  ]
-    .join(' ')
-    .trim();
-
+  const combinedText = getInteractiveCombinedText(target);
   if (!combinedText) {
     return false;
   }
@@ -1135,6 +1212,7 @@ function emitDirectShortPostMutation(
     composerText: '',
     lastRequestAt: 0,
     lastRequestEndpoint: '',
+    actionType: null,
   };
 }
 
@@ -1180,6 +1258,10 @@ function tryConfirmShortPostPublishByPageResult(reason: string) {
     return;
   }
 
+  if (shortPostPublishSession.actionType !== 'original') {
+    return;
+  }
+
   const requestIsRecent =
     shortPostPublishSession.lastRequestAt > 0 &&
     Date.now() - shortPostPublishSession.lastRequestAt < SHORT_POST_PENDING_WINDOW_MS;
@@ -1197,6 +1279,10 @@ function tryConfirmShortPostPublishByPageResult(reason: string) {
 
 function tryConfirmShortPostPublishBySuccessToast(reason: string) {
   if (!hasPendingShortPostPublishSession()) {
+    return;
+  }
+
+  if (shortPostPublishSession.actionType !== 'original') {
     return;
   }
 
@@ -1424,6 +1510,7 @@ function emitMutationEvent(
       composerText: '',
       lastRequestAt: 0,
       lastRequestEndpoint: '',
+      actionType: null,
     };
   }
 }
@@ -1490,7 +1577,7 @@ function handleShortPostPublishIntent(target: EventTarget | null) {
     isElementMatchingSelectors(target, SHORT_POST_PUBLISH_BUTTON_SELECTORS) ||
     isElementMatchingTextPatterns(target, SHORT_POST_PUBLISH_TEXT_PATTERNS)
   ) {
-    openShortPostPublishSession('short-post-publish-clicked');
+    openShortPostPublishSession('short-post-publish-clicked', target);
   }
 }
 
