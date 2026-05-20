@@ -639,14 +639,78 @@ function pickBestAction(taskTexts: string[]) {
   return taskTexts[0] ?? '今天还没有明显的最佳动作';
 }
 
+function getShortOutputCount(shortContentCount: number, threadCount: number) {
+  return shortContentCount + threadCount;
+}
+
+interface ReviewTaskCountLike {
+  taskId: string;
+  current: number;
+}
+
+interface ReviewInteractionLogLike {
+  date: string;
+  actionType: 'original' | 'reply' | 'quote';
+}
+
+function getTaskCurrentValue(tasks: ReviewTaskCountLike[], taskId: string) {
+  const matchedTask = tasks.find((task) => task.taskId === taskId);
+  return matchedTask ? matchedTask.current : null;
+}
+
+function resolveReviewDisplayContentCounts(
+  tasks: ReviewTaskCountLike[],
+  fallback: {
+    shortCount: number;
+    threadCount: number;
+    longFormCount: number;
+  },
+) {
+  const shortContentTaskCount = getTaskCurrentValue(tasks, 'shortContentPosts');
+  const shortPostTaskCount = getTaskCurrentValue(tasks, 'shortPosts');
+  const threadTaskCount = getTaskCurrentValue(tasks, 'threadPosts');
+  const longFormTaskCount = getTaskCurrentValue(tasks, 'longFormPosts');
+
+  const shortOutputCount =
+    typeof shortContentTaskCount === 'number'
+      ? shortContentTaskCount
+      : typeof shortPostTaskCount === 'number' || typeof threadTaskCount === 'number'
+        ? (shortPostTaskCount ?? 0) + (threadTaskCount ?? 0)
+        : getShortOutputCount(fallback.shortCount, fallback.threadCount);
+
+  const longFormCount =
+    typeof longFormTaskCount === 'number' ? longFormTaskCount : fallback.longFormCount;
+
+  return {
+    shortOutputCount,
+    longFormCount,
+  };
+}
+
+function resolveReviewDisplayInteractionCount(
+  tasks: ReviewTaskCountLike[],
+  interactionLogs: ReviewInteractionLogLike[],
+  date: string,
+) {
+  const replyTaskCount = getTaskCurrentValue(tasks, 'highQualityReplies');
+  const quoteTaskCount = getTaskCurrentValue(tasks, 'quotePosts');
+
+  if (typeof replyTaskCount === 'number' || typeof quoteTaskCount === 'number') {
+    return (replyTaskCount ?? 0) + (quoteTaskCount ?? 0);
+  }
+
+  return interactionLogs.filter(
+    (log) => log.date === date && (log.actionType === 'reply' || log.actionType === 'quote'),
+  ).length;
+}
+
 function buildReviewSummary(input: {
   completionPercent: number;
   followersDelta: number | null;
   bestAction: string;
   interactionCount: number;
   remainingTaskCount: number;
-  shortContentCount: number;
-  threadCount: number;
+  shortOutputCount: number;
   longFormCount: number;
 }) {
   const followerLine =
@@ -661,7 +725,7 @@ function buildReviewSummary(input: {
   const interactionLine =
     input.interactionCount > 0 ? `今天已记录 ${input.interactionCount} 次真实互动。` : '';
 
-  return `今天完成率 ${input.completionPercent}%，${followerLine}。内容产出：短推 ${input.shortContentCount}、线程 ${input.threadCount}、长文 ${input.longFormCount}。最有效的是 ${input.bestAction}。${interactionLine}还剩 ${input.remainingTaskCount} 项没完成。`.trim();
+  return `今天完成率 ${input.completionPercent}%，${followerLine}。内容产出：短内容 ${input.shortOutputCount}、长文 ${input.longFormCount}。最有效的是 ${input.bestAction}。${interactionLine}还剩 ${input.remainingTaskCount} 项没完成。`.trim();
 }
 
 function buildNextActionSuggestion(remainingTaskCount: number, biggestGapLabel: string | null) {
@@ -679,8 +743,7 @@ function buildNextActionSuggestion(remainingTaskCount: number, biggestGapLabel: 
 function buildReviewTweetDraft(input: {
   completionPercent: number;
   followersDelta: number | null;
-  shortContentCount: number;
-  threadCount: number;
+  shortOutputCount: number;
   longFormCount: number;
   bestAction: string;
   interactionCount: number;
@@ -697,7 +760,7 @@ function buildReviewTweetDraft(input: {
 
   return [
     `今天打卡 ${input.completionPercent}%，${followerLine}。`,
-    `内容：短推 ${input.shortContentCount}，线程 ${input.threadCount}，长文 ${input.longFormCount}。`,
+    `内容：短内容 ${input.shortOutputCount}，长文 ${input.longFormCount}。`,
     input.interactionCount > 0
       ? `今天最有效的是 ${input.bestAction}，一共完成了 ${input.interactionCount} 次真实互动。`
       : `今天最有效的是 ${input.bestAction}。`,
@@ -746,7 +809,15 @@ export async function getOrCreateDailyReviewDraft(date = getTodayKey()) {
   const incompleteTasks = todayRecord.tasks
     .filter((task) => task.current < task.target)
     .sort((left, right) => right.target - right.current - (left.target - left.current));
-  const completedInteractions = interactionLogs.filter((item) => item.date === date).length;
+  const completedInteractions = resolveReviewDisplayInteractionCount(
+    todayRecord.tasks,
+    interactionLogs,
+    date,
+  );
+  const reviewDisplayContentCounts = resolveReviewDisplayContentCounts(
+    todayRecord.tasks,
+    contentSummary,
+  );
   const bestAction = pickBestAction(
     todayRecord.tasks
       .filter((task) => task.current > 0)
@@ -764,9 +835,8 @@ export async function getOrCreateDailyReviewDraft(date = getTodayKey()) {
     bestAction,
     interactionCount: completedInteractions,
     remainingTaskCount: incompleteTasks.length,
-    shortContentCount: contentSummary.shortCount,
-    threadCount: contentSummary.threadCount,
-    longFormCount: contentSummary.longFormCount,
+    shortOutputCount: reviewDisplayContentCounts.shortOutputCount,
+    longFormCount: reviewDisplayContentCounts.longFormCount,
   });
   const suggestedNextActionBase = buildNextActionSuggestion(
     incompleteTasks.length,
@@ -780,9 +850,8 @@ export async function getOrCreateDailyReviewDraft(date = getTodayKey()) {
   const xDraft = buildReviewTweetDraft({
     completionPercent,
     followersDelta: followerSummary.deltaFromPrevious,
-    shortContentCount: contentSummary.shortCount,
-    threadCount: contentSummary.threadCount,
-    longFormCount: contentSummary.longFormCount,
+    shortOutputCount: reviewDisplayContentCounts.shortOutputCount,
+    longFormCount: reviewDisplayContentCounts.longFormCount,
     bestAction,
     interactionCount: completedInteractions,
     suggestedNextAction,
@@ -796,9 +865,9 @@ export async function getOrCreateDailyReviewDraft(date = getTodayKey()) {
     bestPostUrl: existingDraft?.bestPostUrl ?? '',
     bestReplyUrl: existingDraft?.bestReplyUrl ?? '',
     bestPostFormatGroup: existingDraft?.bestPostFormatGroup ?? null,
-    shortContentCount: contentSummary.shortCount,
-    threadCount: contentSummary.threadCount,
-    longFormCount: contentSummary.longFormCount,
+    shortContentCount: reviewDisplayContentCounts.shortOutputCount,
+    threadCount: 0,
+    longFormCount: reviewDisplayContentCounts.longFormCount,
     summary: summaryText,
     suggestedNextAction,
     xDraft,
