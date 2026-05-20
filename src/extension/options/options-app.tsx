@@ -1669,15 +1669,15 @@ export function OptionsApp() {
     <main class="coach-shell min-h-screen px-5 py-8">
       <div class="mx-auto max-w-6xl">
         <header class="mb-6">
-          <p class="mb-2 text-[11px] font-bold uppercase tracking-[0.26em] text-slate-500">
-            X Growth Task Coach
-          </p>
-          <h1
-            class="m-0 text-4xl leading-none text-slate-900"
-            style={{ fontFamily: '"Palatino Linotype", Palatino, Georgia, serif' }}
-          >
-            X 增长任务台
-          </h1>
+                  <p class="mb-2 text-[11px] font-bold uppercase tracking-[0.26em] text-slate-500">
+                    X Growth Task Coach
+                  </p>
+                  <h1
+                    class="m-0 text-4xl leading-none text-slate-900"
+                    style={{ fontFamily: '"Palatino Linotype", Palatino, Georgia, serif' }}
+                  >
+                    X 增长助手
+                  </h1>
           <p class="mt-3 text-sm font-medium text-slate-500">
             JadeAI乐章 @JadeAINotes
           </p>

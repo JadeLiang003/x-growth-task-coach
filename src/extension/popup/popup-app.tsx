@@ -233,7 +233,7 @@ export function PopupApp() {
         <header class="mb-4 flex items-start justify-between gap-3">
           <div>
             <p class="mb-2 text-[11px] font-bold uppercase tracking-[0.24em] text-slate-500">
-              X Growth Task Coach
+              X 增长助手
             </p>
             <h1
               class="m-0 text-[22px] leading-none text-slate-900"

@@ -19,9 +19,7 @@ const {
 } = await import(utilsModuleUrl);
 
 const X_ARTICLES_URL = 'https://x.com/compose/articles';
-const OUTPUT_PATH = path.resolve(
-  'tmp/twitter-web-exporter/tmp/real-article-publish-diagnostics.json',
-);
+const OUTPUT_PATH = path.resolve('tmp/real-article-publish-diagnostics.json');
 const KEEP_BROWSER_OPEN = process.env.X_GROWTH_KEEP_BROWSER_OPEN !== '0';
 const CLONE_SHARED_PROFILE = process.env.X_GROWTH_CLONE_SHARED_PROFILE === '1';
 const REAL_CHROME_USER_DATA_DIR = path.join(

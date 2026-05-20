@@ -181,7 +181,7 @@ export function Settings() {
                 onClick={async () => {
                   const blob = await db.export();
                   if (blob) {
-                    saveFile(`twitter-web-exporter-${Date.now()}.json`, blob);
+                    saveFile(`x-growth-task-coach-${Date.now()}.json`, blob);
                   }
                 }}
               >

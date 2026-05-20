@@ -1,11 +1,11 @@
 {
-  "name": "twitter-web-exporter",
-  "description": "Export tweets, bookmarks, lists and much more from Twitter(X) web app.",
+  "name": "x-growth-task-coach",
+  "description": "一个帮助你管理 X 起号任务、记录数据和日常复盘的增长助手插件。",
   "version": "1.4.1-beta.1",
   "author": "prin <hi@prin.studio>",
   "license": "MIT",
-  "homepage": "https://github.com/prinsss/twitter-web-exporter",
-  "bugs": "https://github.com/prinsss/twitter-web-exporter/issues",
+  "homepage": "https://github.com/JadeLiang003/x-growth-task-coach",
+  "bugs": "https://github.com/JadeLiang003/x-growth-task-coach/issues",
   "private": true,
   "type": "module",
   "scripts": {

@@ -1,8 +1,14 @@
 {
   "manifest_version": 3,
-  "name": "X Growth Task Coach",
-  "description": "一个面向 0-5k 粉快速成长区间的 X 起号任务教练插件。",
+  "name": "X 增长助手",
+  "description": "一个帮助你管理 X 起号任务、记录数据和日常复盘的增长助手插件。",
   "version": "0.1.0",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
   "permissions": ["storage", "activeTab"],
   "host_permissions": ["https://x.com/*", "https://twitter.com/*", "https://mobile.x.com/*"],
   "background": {
@@ -10,8 +16,13 @@
     "type": "module"
   },
   "action": {
-    "default_title": "X Growth Task Coach",
-    "default_popup": "popup.html"
+    "default_title": "X 增长助手",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png"
+    }
   },
   "options_page": "options.html",
   "content_scripts": [
