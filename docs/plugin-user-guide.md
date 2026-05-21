@@ -21,7 +21,7 @@ X 增长助手就是为这个阶段设计的一款增长辅助插件。它把大
 - 自动生成每日复盘草稿，并支持手动补充附录
 - 支持数据备份与恢复
 
-![悬浮窗效果图](D:/myapp/ai_program/x-growth-task-coach/docs/X%20增长助手说明插图/悬浮窗效果图.png)
+![悬浮窗效果图](D:/myapp/ai_program/tmp/twitter-web-exporter/docs/X%20增长助手说明插图/悬浮窗效果图.png)
 
 ---
 
@@ -45,7 +45,7 @@ X 增长助手就是为这个阶段设计的一款增长辅助插件。它把大
 - 保持自动读取粉丝数开启
 - 点击保存并重建今天任务
 
-![基础设置页](D:/myapp/ai_program/x-growth-task-coach/docs/X%20增长助手说明插图/基础设置页.png)
+![基础设置页](D:/myapp/ai_program/tmp/twitter-web-exporter/docs/X%20增长助手说明插图/基础设置页.png)
 
 完成这一步后，插件才会开始按你的账号和阶段记录后续数据。
 
@@ -55,7 +55,7 @@ X 增长助手就是为这个阶段设计的一款增长辅助插件。它把大
 
 后面的互动统计，会以这些账号的分类结果作为判断基础，所以这一步是后续统计的前提。
 
-![打开关注列表](D:/myapp/ai_program/x-growth-task-coach/docs/X%20增长助手说明插图/打开关注列表.png)
+![打开关注列表](D:/myapp/ai_program/tmp/twitter-web-exporter/docs/X%20增长助手说明插图/打开关注列表.png)
 
 
 ### 第三步：在账号工作台给账号分类
@@ -68,11 +68,11 @@ X 增长助手就是为这个阶段设计的一款增长辅助插件。它把大
 如果你已经确认某个账号值得长期跟进，可以把它加入正式账号池。  
 之后插件会根据这里的分类，判断你的互动应该记成大 V 互动、同生态互动，还是普通互动。
 
-![账号工作台默认态](D:/myapp/ai_program/x-growth-task-coach/docs/X%20增长助手说明插图/账号工作台默认态.png)
+![账号工作台默认态](D:/myapp/ai_program/tmp/twitter-web-exporter/docs/X%20增长助手说明插图/账号工作台默认态.png)
 
 如果你一次要处理很多账号，也可以用批量模式。
 
-![账号工作台批量处理](D:/myapp/ai_program/x-growth-task-coach/docs/X%20增长助手说明插图/账号工作台批量处理.png)
+![账号工作台批量处理](D:/myapp/ai_program/tmp/twitter-web-exporter/docs/X%20增长助手说明插图/账号工作台批量处理.png)
 
 ### 第四步：开始正常发帖和互动
 
@@ -91,7 +91,7 @@ X 增长助手就是为这个阶段设计的一款增长辅助插件。它把大
 白天执行时，可以直接打开 popup 查看当天进度。  
 晚上再查看复盘草稿，补充链接或备注，形成当天记录。
 
-![popup 总览](D:/myapp/ai_program/x-growth-task-coach/docs/X%20增长助手说明插图/popup%20总览.png)
+![popup 总览](D:/myapp/ai_program/tmp/twitter-web-exporter/docs/X%20增长助手说明插图/popup%20总览.png)
 
 ---
 
@@ -111,7 +111,7 @@ popup 会集中显示：
 
 如果你只想快速看今天的情况，直接打开 popup 即可。
 
-![popup效果图](D:/myapp/ai_program/x-growth-task-coach/docs/X%20增长助手说明插图/popup效果图.png)
+![popup效果图](D:/myapp/ai_program/tmp/twitter-web-exporter/docs/X%20增长助手说明插图/popup效果图.png)
 
 ### 4.2 热力图和粉丝变化
 
@@ -123,7 +123,7 @@ popup 会集中显示：
 
 热力图用来看执行有没有稳定，粉丝变化用来看执行后结果有没有在走高。
 
-![热力图和粉丝变化双栏](D:/myapp/ai_program/x-growth-task-coach/docs/X%20增长助手说明插图/热力图和粉丝变化双栏.png)
+![热力图和粉丝变化双栏](D:/myapp/ai_program/tmp/twitter-web-exporter/docs/X%20增长助手说明插图/热力图和粉丝变化双栏.png)
 
 ### 4.3 账号工作台
 
@@ -152,7 +152,7 @@ popup 会集中显示：
 
 固定到 popup 后，可以直接从 popup 一键进入。
 
-![搜索模板页](D:/myapp/ai_program/x-growth-task-coach/docs/X%20增长助手说明插图/搜索模板页.png)
+![搜索模板页](D:/myapp/ai_program/tmp/twitter-web-exporter/docs/X%20增长助手说明插图/搜索模板页.png)
 
 ### 4.5 每日复盘
 
@@ -176,7 +176,7 @@ popup 会集中显示：
 - 导出每日复盘 CSV
 - 导入完整备份 JSON
 
-![数据备份与恢复](D:/myapp/ai_program/x-growth-task-coach/docs/X%20增长助手说明插图/数据备份与恢复.png)
+![数据备份与恢复](D:/myapp/ai_program/tmp/twitter-web-exporter/docs/X%20增长助手说明插图/数据备份与恢复.png)
 
 ---
 
@@ -306,4 +306,3 @@ popup 会集中显示：
 ### 7.6 我换电脑怎么办
 
 先导出完整备份 JSON，再在新环境导入即可。
-
